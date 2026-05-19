@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background-color: #fff5f7;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+}
+
+.menu-layout {
+  display: flex;
+  height: calc(100vh - 180px);
+}
+
+.sidebar {
+  width: 180px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+}
+
+.category-button {
+  border: none;
+  background: none;
+  padding: 20px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.category-button:hover {
+  background-color: pink;
+}
+
+.food-section {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.food-card {
+  background-color: white;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.food-card button {
+  background-color: pink;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.cart-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.cart-header {
+  cursor: pointer;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item button {
+  margin-right: 30px;
+}
+
+.animate {
+  animation: pop 0.3s ease;
+}
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
