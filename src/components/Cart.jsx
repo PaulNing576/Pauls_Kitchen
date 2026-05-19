@@ -2,7 +2,8 @@ function Cart({
   cart,
   removeFromCart,
   cartOpen,
-  setCartOpen
+  setCartOpen,
+  placeOrder
 }) {
 
   return (
@@ -20,11 +21,20 @@ function Cart({
               <p>
                 {item.name} x{item.quantity}
               </p>
-              <button onClick={() => removeFromCart(index)}>
+              <button
+                onClick={() => removeFromCart(index)}
+              >
                 Remove
               </button>
             </div>
           ))}
+          <button
+            className="place-order-button"
+            onClick={placeOrder}
+          >
+            Place Order
+          </button>
+
         </div>
       )}
     </div>

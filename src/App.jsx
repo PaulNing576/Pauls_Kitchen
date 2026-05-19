@@ -4,7 +4,17 @@ import Menu from "./components/Menu"
 import Cart from "./components/Cart"
 import menu from "./data/menu"
 
+import app from "./firebase"
+
+import {
+  getFirestore,
+  collection,
+  addDoc
+} from "firebase/firestore"
+
 function App() {
+
+  const db = getFirestore(app)
 
   const [cart, setCart] = useState([])
   const [selectedCategory, setSelectedCategory] =
@@ -58,6 +68,27 @@ function App() {
     }
   }
 
+  async function placeOrder() {
+    if (cart.length === 0) {
+      alert("Cart is empty")
+      return
+    }
+    try {
+      await addDoc(
+        collection(db, "orders"),
+        {
+          items: cart,
+          createdAt: new Date()
+        }
+      )
+      alert("Order placed!")
+      setCart([])
+    } catch (error) {
+      console.log(error)
+      alert("Failed to place order")
+    }
+  }
+
   return (
     <div>
 
@@ -75,6 +106,7 @@ function App() {
         removeFromCart={removeFromCart}
         cartOpen={cartOpen}
         setCartOpen={setCartOpen}
+        placeOrder={placeOrder}
       />
 
     </div>

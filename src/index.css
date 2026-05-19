@@ -15,7 +15,7 @@ h1 {
 }
 
 .sidebar {
-  width: 180px;
+  width: 150px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -93,4 +93,36 @@ h1 {
   100% {
     transform: scale(1);
   }
+}
+
+.place-order-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: pink;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.admin-page {
+  padding: 20px;
+  background-color: #fff5f7;
+  min-height: 100vh;
+}
+
+.order-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.order-time {
+  margin-left: 10px;
+  font-size: 14px;
+  color: gray;
+  font-weight: normal;
 }
