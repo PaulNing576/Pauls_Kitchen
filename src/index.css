@@ -1,3 +1,5 @@
+/* ========================= Global ========================= */
+
 body {
   margin: 0;
   font-family: Arial;
@@ -8,6 +10,71 @@ h1 {
   text-align: center;
   padding: 20px;
 }
+
+/* ========================= Landing Page ========================= */
+
+.landing-title {
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.landing-subtitle {
+  font-size: 22px;
+  font-weight: 700;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+.landing-page {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.landing-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  color: white;
+  z-index: 2;
+}
+
+.enter-button {
+  background-color: pink;
+  color: black;
+  padding: 16px 36px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  display: inline-block;
+}
+
+.enter-button:hover {
+  transform: scale(1.08);
+  background-color: white;
+}
+
+/* ========================= Menu Layout ========================= */
 
 .menu-layout {
   display: flex;
@@ -41,11 +108,44 @@ h1 {
   overflow-y: auto;
 }
 
+/* ========================= Food Cards ========================= */
+
+.food-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.food-image {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: transform 0.25s ease;
+}
+
+.food-card:hover .food-image {
+  transform: scale(1.05);
+}
+
 .food-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
-  margin-bottom: 15px;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.food-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 .food-card button {
@@ -53,31 +153,6 @@ h1 {
   border: none;
   padding: 8px 12px;
   border-radius: 8px;
-}
-
-.cart-bar {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: white;
-  border-top: 1px solid #ddd;
-  padding: 10px;
-  max-height: 180px;
-  overflow-y: auto;
-}
-
-.cart-header {
-  cursor: pointer;
-}
-
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.cart-item button {
-  margin-right: 30px;
 }
 
 .animate {
@@ -95,6 +170,33 @@ h1 {
   }
 }
 
+/* ========================= Cart ========================= */
+
+.cart-header {
+  cursor: pointer;
+}
+
+.cart-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item button {
+  margin-right: 30px;
+}
+
 .place-order-button {
   width: 100%;
   padding: 12px;
@@ -106,6 +208,14 @@ h1 {
   font-weight: bold;
   cursor: pointer;
 }
+
+.total-price {
+  margin-top: 15px;
+  text-align: right;
+  margin-right: 15px;
+}
+
+/* ========================= Admin Dashboard ========================= */
 
 .admin-page {
   padding: 20px;
@@ -125,4 +235,34 @@ h1 {
   font-size: 14px;
   color: gray;
   font-weight: normal;
+}
+
+.complete-button {
+  margin-top: 12px;
+  background-color: #ffb6c1;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.complete-button:hover {
+  background-color: #ff8fab;
+}
+
+.generate-code-button {
+  margin-bottom: 24px;
+  background-color: #ffb6c1;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.generate-code-button:hover {
+  background-color: #ff8fab;
 }

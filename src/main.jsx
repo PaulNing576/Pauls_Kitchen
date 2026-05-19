@@ -9,6 +9,7 @@ import {
 
 import App from './App'
 import Admin from './components/Admin'
+import Landing from './components/Landing'
 
 import './index.css'
 
@@ -20,6 +21,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
       <Route
         path="/"
+        element={<Landing />}
+      />
+
+      <Route
+        path="/menu"
         element={<App />}
       />
 

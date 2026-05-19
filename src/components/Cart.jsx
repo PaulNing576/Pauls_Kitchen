@@ -6,13 +6,25 @@ function Cart({
   placeOrder
 }) {
 
+      const totalPrice = cart.reduce((total, item) => {
+
+    return total + item.price * item.quantity
+
+  }, 0)
+
   return (
     <div className="cart-bar">
       <div
         className="cart-header"
         onClick={() => setCartOpen(!cartOpen)}
       >
-        <h3>🛒 Cart ({cart.length})</h3>
+        <h3>
+          🛒 Cart (
+          {cart.reduce((total, item) => {
+            return total + item.quantity
+          }, 0)}
+          )
+        </h3>
       </div>
       {cartOpen && (
         <div>
@@ -28,6 +40,9 @@ function Cart({
               </button>
             </div>
           ))}
+          <h3 className="total-price">
+            Total: ${totalPrice}
+          </h3>
           <button
             className="place-order-button"
             onClick={placeOrder}

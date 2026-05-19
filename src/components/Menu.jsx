@@ -57,16 +57,21 @@ function Menu({
                 : "food-card"
             }
           >
+            <div className="food-info">
+              <h3>{item.name}</h3>
+              <p>${item.price}</p>
+              <button
+                onClick={() => handleAddToCart(item, index)}
+              >
+                Add
+              </button>
+            </div>
 
-            <h3>{item.name}</h3>
-
-            <p>${item.price}</p>
-
-            <button
-              onClick={() => handleAddToCart(item, index)}
-            >
-              Add
-            </button>
+            <img
+              src={item.image}
+              alt={item.name}
+              className="food-image"
+            />
 
           </div>
 

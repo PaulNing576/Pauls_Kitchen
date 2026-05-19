@@ -9,7 +9,12 @@ import app from "./firebase"
 import {
   getFirestore,
   collection,
-  addDoc
+  addDoc,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc
 } from "firebase/firestore"
 
 function App() {
@@ -68,7 +73,54 @@ function App() {
     }
   }
 
+  async function verifyCode(inputCode) {
+
+    const codesRef = collection(db, "codes")
+
+    const q = query(
+      codesRef,
+      where("code", "==", inputCode)
+    )
+
+    const querySnapshot = await getDocs(q)
+
+    if (querySnapshot.empty) {
+      return null
+    }
+
+    const codeDoc = querySnapshot.docs[0]
+    const codeData = codeDoc.data()
+
+    if (
+      codeData.type === "single"
+      &&
+      codeData.used === true
+    ) {
+      return null
+    }
+
+    return {
+      id: codeDoc.id,
+      ...codeData
+    }
+  }
+
   async function placeOrder() {
+    const inputCode = prompt(
+      "Please enter your access code"
+    )
+
+    if (!inputCode) {
+      return
+    }
+
+    const validCode = await verifyCode(inputCode)
+
+    if (!validCode) {
+      alert("Invalid or used code")
+      return
+    }
+    
     if (cart.length === 0) {
       alert("Cart is empty")
       return
@@ -81,6 +133,18 @@ function App() {
           createdAt: new Date()
         }
       )
+
+      if (validCode.type === "single") {
+        const codeRef = doc(
+          db,
+          "codes",
+          validCode.id
+        )
+        await updateDoc(codeRef, {
+          used: true
+        })
+      }
+
       alert("Order placed!")
       setCart([])
     } catch (error) {

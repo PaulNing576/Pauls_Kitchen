@@ -5,8 +5,16 @@ import app from "../firebase"
 import {
   getFirestore,
   collection,
-  onSnapshot
-} from "firebase/firestore"
+  onSnapshot,
+  query,
+  orderBy,
+  doc,
+  deleteDoc,
+  addDoc
+}
+from "firebase/firestore"
+
+import generateCode from "../utils/generateCode"
 
 function Admin() {
 
@@ -15,9 +23,13 @@ function Admin() {
 
   useEffect(() => {
 
-    const unsubscribe = onSnapshot(
-
+    const q = query(
       collection(db, "orders"),
+      orderBy("createdAt", "desc")
+    )
+
+    const unsubscribe = onSnapshot(
+      q,
 
       (snapshot) => {
 
@@ -37,9 +49,37 @@ function Admin() {
 
   }, [])
 
+  async function completeOrder(orderId) {
+
+    await deleteDoc(
+      doc(db, "orders", orderId)
+    )
+  }
+
+  async function generateSingleCode() {
+
+    const newCode = generateCode()
+
+    await addDoc(
+        collection(db, "codes"),
+        {
+        code: newCode,
+        type: "single",
+        used: false
+        }
+    )
+    alert(`New code: ${newCode}`)
+  }
+
   return (
 
     <div className="admin-page">
+      <button
+        className="generate-code-button"
+        onClick={generateSingleCode}
+      >
+        Generate Invite Code
+      </button>
       <h1>Orders Dashboard</h1>
       {orders.map((order) => (
         <div
@@ -64,6 +104,12 @@ function Admin() {
               {item.name} x{item.quantity}
             </p>
           ))}
+          <button
+            className="complete-button"
+            onClick={() => completeOrder(order.id)}
+          >
+            Complete
+          </button>
         </div>
       ))}
     </div>
