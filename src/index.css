@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: Arial;
-  background-color: #fff5f7;
+  background-color: #e7f8ff;
 }
 
 h1 {
@@ -14,13 +14,17 @@ h1 {
 /* ========================= Landing Page ========================= */
 
 .landing-title {
-  font-size: 72px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-family: 'Allura', cursive;
+  font-size: 130px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  letter-spacing: 2px;
 }
 
 .landing-subtitle {
-  font-size: 22px;
+  font-family: 'Allura', cursive;
+  font-size: 50px;
   font-weight: 700;
   opacity: 0.9;
   letter-spacing: 0.5px;
@@ -150,6 +154,8 @@ h1 {
 }
 
 .food-card button {
+  width: 72px;
+  height: 36px;
   background-color: pink;
   border: none;
   padding: 8px 12px;

@@ -13,7 +13,7 @@ function Landing() {
     >
       <div className="landing-overlay">
         <h1 className="landing-title">
-          ❤️ Paul's Kitchen ❤️
+           Paul's Kitchen 
         </h1>
         <p className="landing-subtitle">
           Homemade food made with love
