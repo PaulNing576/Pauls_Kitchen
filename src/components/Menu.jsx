@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+import imageMap from "../utils/imageMap"
+
 function Menu({
   menu,
   addToCart,
@@ -21,9 +23,16 @@ function Menu({
   }
 
   const categories = [
-    "Main Dishes",
-    "Desserts",
-    "Drinks"
+    "Appetizer",
+    "Vege",
+    "Pork",
+    "Chicken",
+    "Beef & Lamb",
+    "Seafood",
+    "Rice Bowls",
+    "Soup",
+    "Staples",
+    "Specials"
   ]
 
   const filteredMenu = menu.filter((item) => {
@@ -66,13 +75,11 @@ function Menu({
                 Add
               </button>
             </div>
-
             <img
-              src={item.image}
-              alt={item.name}
               className="food-image"
+              src={imageMap[item.image]}
+              alt={item.name}
             />
-
           </div>
 
         ))}

@@ -15,9 +15,11 @@ import {
 from "firebase/firestore"
 
 import generateCode from "../utils/generateCode"
+import AdminLogin from "./AdminLogin"
 
 function Admin() {
 
+  const [authenticated, setAuthenticated] = useState(false)
   const [orders, setOrders] = useState([])
   const db = getFirestore(app)
 
@@ -71,6 +73,16 @@ function Admin() {
     alert(`New code: ${newCode}`)
   }
 
+  if (!authenticated) {
+    return (
+      <AdminLogin
+        onSuccess={() =>
+          setAuthenticated(true)
+        }
+      />
+    )
+  }
+
   return (
 
     <div className="admin-page">
@@ -87,17 +99,12 @@ function Admin() {
           key={order.id}
         >
           <h3>
-
             Order
-
             <span className="order-time">
-
                 {new Date(
                 order.createdAt.seconds * 1000
                 ).toLocaleString()}
-
             </span>
-
           </h3>
           {order.items.map((item) => (
             <p>
