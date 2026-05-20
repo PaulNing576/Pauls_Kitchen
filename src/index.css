@@ -94,6 +94,8 @@ h1 {
 }
 
 .category-button {
+  color: black;
+  text-decoration: none;
   border: none;
   background: none;
   padding: 20px 10px;
