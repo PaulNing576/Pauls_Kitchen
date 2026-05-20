@@ -45,6 +45,7 @@ function Menu({
       <div className="sidebar">
         {categories.map((category) => (
           <button
+            key={category}
             className="category-button"
             onClick={() => setSelectedCategory(category)}
           >
@@ -56,6 +57,7 @@ function Menu({
       <div className="food-section">
         {filteredMenu.map((item, index) => (
           <div
+            key={item.name}
             className={
               animatedItem === index
                 ? "food-card animate"

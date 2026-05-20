@@ -58,7 +58,7 @@ function Landing() {
         <h1 className="landing-title">
            Paul 's Kitchen 
         </h1>
-        <p className="landing-subtitle">
+        <div className="landing-subtitle">
           <div className="landing-access-box">
             <p className="landing-access-text">
               Please prepare your access code from Paul.
@@ -88,7 +88,7 @@ function Landing() {
             </button>
           </div>
           Homemade food made with love
-        </p>
+        </div>
 
         <Link
           to="/menu"

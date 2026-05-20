@@ -29,7 +29,10 @@ function Cart({
       {cartOpen && (
         <div>
           {cart.map((item, index) => (
-            <div className="cart-item">
+            <div
+              key={item.name}
+              className="cart-item"
+            >
               <p>
                 {item.name} x{item.quantity}
               </p>
