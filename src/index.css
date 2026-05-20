@@ -156,6 +156,8 @@ h1 {
 }
 
 .food-card button {
+  color: black;
+  text-decoration: none;
   width: 72px;
   height: 36px;
   background-color: pink;
@@ -207,6 +209,8 @@ h1 {
 }
 
 .place-order-button {
+  color: black;
+  text-decoration: none;
   width: 100%;
   padding: 12px;
   margin-top: 10px;
@@ -337,7 +341,7 @@ h1 {
   }
 
   .sidebar {
-    width: 90px;
+    width: 95px;
     background-color: white;
     display: flex;
     flex-direction: column;
