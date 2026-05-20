@@ -1,7 +1,7 @@
 function generateCode(length = 6) {
 
   const chars =
-    "QWERTYUIOPASDFGHJKLZXCVBNM0123456789"
+    "QWERTYUPASDFGHJKLZXCVBNM23456789"
 
   let result = ""
 

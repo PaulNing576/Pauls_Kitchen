@@ -4,7 +4,7 @@ const menu = [
   {
     id: 1,
     name: "凉拌拍黄瓜",
-    price: 8,
+    price: 4,
     category: "Appetizer",
     image: "Liangbanpaihuanggua.jpg"
   },
@@ -12,7 +12,7 @@ const menu = [
   {
     id: 2,
     name: "小葱拌豆腐",
-    price: 8,
+    price: 5,
     category: "Appetizer",
     image: "Xiaocongbandoufu.jpg"
   },
@@ -20,7 +20,7 @@ const menu = [
   {
     id: 3,
     name: "芹菜腐竹拌木耳",
-    price: 10,
+    price: 5,
     category: "Appetizer",
     image: "Qincaifuzhubanmuer.jpg"
   },
@@ -28,7 +28,7 @@ const menu = [
   {
     id: 4,
     name: "凯撒沙拉",
-    price: 12,
+    price: 6,
     category: "Appetizer",
     image: "Kaisashala.jpg"
   },
@@ -36,7 +36,7 @@ const menu = [
   {
     id: 5,
     name: "三文鱼刺身",
-    price: 18,
+    price: 10,
     category: "Appetizer",
     image: "Sanwenyucishen.jpg"
   },
@@ -46,7 +46,7 @@ const menu = [
   {
     id: 6,
     name: "西红柿炒鸡蛋",
-    price: 12,
+    price: 7,
     category: "Vege",
     image: "Xihongshichaojidan.jpg"
   },
@@ -54,7 +54,7 @@ const menu = [
   {
     id: 7,
     name: "酸辣土豆丝",
-    price: 11,
+    price: 7,
     category: "Vege",
     image: "Suanlatudousi.jpg"
   },
@@ -62,7 +62,7 @@ const menu = [
   {
     id: 8,
     name: "蚝油生菜",
-    price: 12,
+    price: 5,
     category: "Vege",
     image: "Haoyoushengcai.jpg"
   },
@@ -70,7 +70,7 @@ const menu = [
   {
     id: 9,
     name: "蒜蓉西兰花",
-    price: 13,
+    price: 5,
     category: "Vege",
     image: "Suanrongxilanhua.jpg"
   },
@@ -78,7 +78,7 @@ const menu = [
   {
     id: 10,
     name: "鱼香茄子",
-    price: 14,
+    price: 6,
     category: "Vege",
     image: "Yuxiangqiezi.jpg"
   },
@@ -86,7 +86,7 @@ const menu = [
   {
     id: 11,
     name: "地三鲜",
-    price: 15,
+    price: 8,
     category: "Vege",
     image: "Disanxian.jpg"
   },
@@ -94,7 +94,7 @@ const menu = [
   {
     id: 12,
     name: "干锅花菜",
-    price: 15,
+    price: 8,
     category: "Vege",
     image: "Ganguohuacai.jpg"
   },
@@ -102,7 +102,7 @@ const menu = [
   {
     id: 13,
     name: "手撕包菜",
-    price: 12,
+    price: 5,
     category: "Vege",
     image: "Shousibaocai.jpg"
   },
@@ -110,7 +110,7 @@ const menu = [
   {
     id: 14,
     name: "醋溜白菜",
-    price: 11,
+    price: 5,
     category: "Vege",
     image: "Culiubaicai.jpg"
   },
@@ -118,7 +118,7 @@ const menu = [
   {
     id: 15,
     name: "尖椒干豆腐",
-    price: 14,
+    price: 10,
     category: "Vege",
     image: "Jianjiaogandoufu.jpg"
   },
@@ -126,7 +126,7 @@ const menu = [
   {
     id: 100,
     name: "白菜炖豆腐",
-    price: 14,
+    price: 8,
     category: "Vege",
     image: "Baicaidundoufu.jpg"
   },
@@ -134,7 +134,7 @@ const menu = [
   {
     id: 99,
     name: "抱蛋豆腐",
-    price: 14,
+    price: 6,
     category: "Vege",
     image: "Baodandoufu.jpg"
   },
@@ -142,7 +142,7 @@ const menu = [
   {
     id: 98,
     name: "炒合菜",
-    price: 14,
+    price: 5,
     category: "Vege",
     image: "Chaohecai.jpg"
   },
@@ -150,7 +150,7 @@ const menu = [
   {
     id: 95,
     name: "干煸四季豆",
-    price: 19,
+    price: 8,
     category: "Vege",
     image: "Ganbiandoujiao.jpg"
   },
@@ -158,7 +158,7 @@ const menu = [
   {
     id: 92,
     name: "韭菜炒鸡蛋",
-    price: 19,
+    price: 6,
     category: "Vege",
     image: "Jiucaichaojidan.jpg"
   },
@@ -166,7 +166,7 @@ const menu = [
   {
     id: 89,
     name: "苦瓜炒鸡蛋",
-    price: 19,
+    price: 5,
     category: "Vege",
     image: "Kuguachaodan.jpg"
   },
@@ -174,7 +174,7 @@ const menu = [
   {
     id: 87,
     name: "清炒娃娃菜",
-    price: 19,
+    price: 8,
     category: "Vege",
     image: "Qingchaowawacai.jpg"
   },
@@ -182,7 +182,7 @@ const menu = [
   {
     id: 86,
     name: "糖醋鸡蛋",
-    price: 19,
+    price: 5,
     category: "Vege",
     image: "Tangcujidan.jpg"
   },
@@ -192,7 +192,7 @@ const menu = [
   {
     id: 16,
     name: "麻婆豆腐",
-    price: 15,
+    price: 8,
     category: "Pork",
     image: "Mapodoufu.jpg"
   },
@@ -200,7 +200,7 @@ const menu = [
   {
     id: 17,
     name: "辣椒炒肉",
-    price: 16,
+    price: 10,
     category: "Pork",
     image: "Lajiaochaorou.jpg"
   },
@@ -208,7 +208,7 @@ const menu = [
   {
     id: 18,
     name: "尖椒肉丝",
-    price: 16,
+    price: 8,
     category: "Pork",
     image: "Jianjiaorousi.jpg"
   },
@@ -216,7 +216,7 @@ const menu = [
   {
     id: 19,
     name: "土匪猪肝",
-    price: 17,
+    price: 12,
     category: "Pork",
     image: "Tufeizhugan.jpg"
   },
@@ -224,7 +224,7 @@ const menu = [
   {
     id: 20,
     name: "肉末茄子",
-    price: 16,
+    price: 10,
     category: "Pork",
     image: "Roumoqiezi.jpg"
   },
@@ -232,7 +232,7 @@ const menu = [
   {
     id: 21,
     name: "猪肉炖粉条",
-    price: 18,
+    price: 12,
     category: "Pork",
     image: "Zhuroudunfentiao.jpg"
   },
@@ -240,7 +240,7 @@ const menu = [
   {
     id: 22,
     name: "农家一碗香",
-    price: 18,
+    price: 12,
     category: "Pork",
     image: "Nongjiayiwanxiang.jpg"
   },
@@ -248,7 +248,7 @@ const menu = [
   {
     id: 23,
     name: "鱼香肉丝",
-    price: 17,
+    price: 10,
     category: "Pork",
     image: "Yuxiangrousi.jpg"
   },
@@ -256,7 +256,7 @@ const menu = [
   {
     id: 24,
     name: "红烧肉",
-    price: 20,
+    price: 16,
     category: "Pork",
     image: "Hongshaorou.jpg"
   },
@@ -264,7 +264,7 @@ const menu = [
   {
     id: 25,
     name: "红烧排骨",
-    price: 22,
+    price: 16,
     category: "Pork",
     image: "Hongshaopaigu.jpg"
   },
@@ -272,7 +272,7 @@ const menu = [
   {
     id: 26,
     name: "水煮肉片",
-    price: 19,
+    price: 16,
     category: "Pork",
     image: "Shuizhuroupian.jpg"
   },
@@ -280,7 +280,7 @@ const menu = [
   {
     id: 27,
     name: "京酱肉丝",
-    price: 18,
+    price: 10,
     category: "Pork",
     image: "Jingjiangrousi.jpg"
   },
@@ -288,7 +288,7 @@ const menu = [
   {
     id: 28,
     name: "回锅肉",
-    price: 17,
+    price: 12,
     category: "Pork",
     image: "Huiguorou.jpg"
   },
@@ -296,7 +296,7 @@ const menu = [
   {
     id: 29,
     name: "锅包肉",
-    price: 19,
+    price: 18,
     category: "Pork",
     image: "Guobaorou.jpg"
   },
@@ -304,7 +304,7 @@ const menu = [
   {
     id: 53,
     name: "溜肉段",
-    price: 19,
+    price: 18,
     category: "Pork",
     image: "Liurouduan.jpg"
   },
@@ -312,7 +312,7 @@ const menu = [
   {
     id: 55,
     name: "把子肉",
-    price: 19,
+    price: 20,
     category: "Pork",
     image: "Bazirou.jpg"
   },
@@ -320,7 +320,7 @@ const menu = [
   {
     id: 96,
     name: "东坡肉",
-    price: 19,
+    price: 24,
     category: "Pork",
     image: "Dongporou.jpg"
   },
@@ -328,7 +328,7 @@ const menu = [
   {
     id: 97,
     name: "番茄滑肉",
-    price: 19,
+    price: 14,
     category: "Pork",
     image: "Fanqiehuarou.jpg"
   },
@@ -336,7 +336,7 @@ const menu = [
   {
     id: 88,
     name: "芹菜炒肉丝",
-    price: 19,
+    price: 8,
     category: "Pork",
     image: "Qincaichaorousi.jpg"
   },
@@ -344,7 +344,7 @@ const menu = [
   {
     id: 85,
     name: "猪肉土豆烧豆角",
-    price: 19,
+    price: 12,
     category: "Pork",
     image: "Tudoushaodoujiao.jpg"
   },
@@ -354,7 +354,7 @@ const menu = [
   {
     id: 30,
     name: "宫保鸡丁",
-    price: 17,
+    price: 8,
     category: "Chicken",
     image: "Gongbaojiding.jpg"
   },
@@ -362,7 +362,7 @@ const menu = [
   {
     id: 31,
     name: "黄焖鸡",
-    price: 18,
+    price: 6,
     category: "Chicken",
     image: "Huangmenji.jpg"
   },
@@ -378,7 +378,7 @@ const menu = [
   {
     id: 94,
     name: "红烧鸡腿",
-    price: 18,
+    price: 14,
     category: "Chicken",
     image: "Hongshaojitui.jpg"
   },
@@ -386,7 +386,7 @@ const menu = [
   {
     id: 33,
     name: "葱油鸡",
-    price: 17,
+    price: 8,
     category: "Chicken",
     image: "Congyouji.jpg"
   },
@@ -394,7 +394,7 @@ const menu = [
   {
     id: 34,
     name: "三杯鸡",
-    price: 18,
+    price: 8,
     category: "Chicken",
     image: "Sanbeiji.jpg"
   },
@@ -402,7 +402,7 @@ const menu = [
   {
     id: 35,
     name: "爆炒鸡胗",
-    price: 18,
+    price: 8,
     category: "Chicken",
     image: "Baochaojizhen.jpg"
   },
@@ -410,7 +410,7 @@ const menu = [
   {
     id: 36,
     name: "酸辣鸡胗",
-    price: 18,
+    price: 10,
     category: "Chicken",
     image: "Suanlajizhen.jpg"
   },
@@ -418,7 +418,7 @@ const menu = [
   {
     id: 54,
     name: "鸡公煲",
-    price: 18,
+    price: 10,
     category: "Chicken",
     image: "Jigongbao.jpg"
   },
@@ -428,7 +428,7 @@ const menu = [
   {
     id: 37,
     name: "小炒牛肉",
-    price: 19,
+    price: 20,
     category: "Beef & Lamb",
     image: "Nongjiaxiaochaorou.jpg"
   },
@@ -436,7 +436,7 @@ const menu = [
   {
     id: 38,
     name: "葱爆羊肉",
-    price: 22,
+    price: 14,
     category: "Beef & Lamb",
     image: "Congbaoyangrou.jpg"
   },
@@ -444,7 +444,7 @@ const menu = [
   {
     id: 39,
     name: "孜然羊肉",
-    price: 22,
+    price: 14,
     category: "Beef & Lamb",
     image: "Ziranyangrou.jpg"
   },
@@ -454,7 +454,7 @@ const menu = [
   {
     id: 40,
     name: "油焖大虾",
-    price: 24,
+    price: 16,
     category: "Seafood",
     image: "Youmendaxia.jpg"
   },
@@ -464,7 +464,7 @@ const menu = [
   {
     id: 41,
     name: "照烧鸡排饭",
-    price: 18,
+    price: 10,
     category: "Rice Bowls",
     image: "Zhaoshaojipaifan.jpg"
   },
@@ -472,7 +472,7 @@ const menu = [
   {
     id: 42,
     name: "咖喱鸡腿饭",
-    price: 18,
+    price: 10,
     category: "Rice Bowls",
     image: "Kalijituifan.jpg"
   },
@@ -480,7 +480,7 @@ const menu = [
   {
     id: 43,
     name: "卤肉饭",
-    price: 17,
+    price: 16,
     category: "Rice Bowls",
     image: "Luroufan.jpg"
   },
@@ -490,7 +490,7 @@ const menu = [
   {
     id: 44,
     name: "紫菜蛋花汤",
-    price: 10,
+    price: 6,
     category: "Soup",
     image: "Zicaidanhuatang.jpg"
   },
@@ -498,7 +498,7 @@ const menu = [
   {
     id: 45,
     name: "金汤娃娃菜",
-    price: 12,
+    price: 10,
     category: "Soup",
     image: "Jintangwawacai.jpg"
   },
@@ -506,7 +506,7 @@ const menu = [
   {
     id: 46,
     name: "白菜豆腐汤",
-    price: 11,
+    price: 8,
     category: "Soup",
     image: "Baicaidoufutang.jpg"
   },
@@ -514,7 +514,7 @@ const menu = [
   {
     id: 90,
     name: "排骨莲藕汤",
-    price: 11,
+    price: 14,
     category: "Soup",
     image: "Paigulianoutang.jpg"
   },
@@ -524,7 +524,7 @@ const menu = [
   {
     id: 47,
     name: "蒜香法棍",
-    price: 9,
+    price: 6,
     category: "Staples",
     image: "Suanxiangfagun.jpg"
   },
@@ -532,7 +532,7 @@ const menu = [
   {
     id: 48,
     name: "牛肉芝士汉堡",
-    price: 16,
+    price: 12,
     category: "Staples",
     image: "Niurouzhishihanbao.jpg"
   },
@@ -540,7 +540,7 @@ const menu = [
   {
     id: 49,
     name: "意大利面",
-    price: 15,
+    price: 8,
     category: "Staples",
     image: "Yidalimian.jpg"
   },
@@ -548,7 +548,7 @@ const menu = [
   {
     id: 50,
     name: "蛋炒饭",
-    price: 11,
+    price: 6,
     category: "Staples",
     image: "Danchaofan.jpg"
   },
@@ -556,7 +556,7 @@ const menu = [
   {
     id: 51,
     name: "油泼面",
-    price: 13,
+    price: 6,
     category: "Staples",
     image: "Youpomian.jpg"
   },
@@ -566,7 +566,7 @@ const menu = [
   {
     id: 52,
     name: "麻辣香锅",
-    price: 25,
+    price: 20,
     category: "Specials",
     image: "Malaxiangguo.jpg"
   }

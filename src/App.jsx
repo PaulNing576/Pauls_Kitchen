@@ -1,8 +1,10 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import Menu from "./components/Menu"
 import Cart from "./components/Cart"
 import menu from "./data/menu"
+import Checkout from "./components/Checkout"
 
 import app from "./firebase"
 
@@ -25,6 +27,10 @@ function App() {
   const [selectedCategory, setSelectedCategory] =
     useState("Main Dishes")
   const [cartOpen, setCartOpen] = useState(false)
+  const [currentPage, setCurrentPage] =
+    useState("menu")
+
+  const navigate = useNavigate()
 
   function addToCart(item) {
     const existingItem = cart.find((cartItem) => {
@@ -105,26 +111,7 @@ function App() {
     }
   }
 
-  async function placeOrder() {
-    const inputCode = prompt(
-      "Please enter your access code"
-    )
-
-    if (!inputCode) {
-      return
-    }
-
-    const validCode = await verifyCode(inputCode)
-
-    if (!validCode) {
-      alert("Invalid or used code")
-      return
-    }
-    
-    if (cart.length === 0) {
-      alert("Cart is empty")
-      return
-    }
+  async function placeOrder(codeData) {
     try {
       await addDoc(
         collection(db, "orders"),
@@ -134,19 +121,23 @@ function App() {
         }
       )
 
-      if (validCode.type === "single") {
-        const codeRef = doc(
-          db,
-          "codes",
-          validCode.id
+      if (
+        codeData.type === "single"
+        ||
+        codeData.type === "guest"
+      ) {
+        await updateDoc(
+          doc(db, "codes", codeData.id),
+          {
+            used: true
+          }
         )
-        await updateDoc(codeRef, {
-          used: true
-        })
       }
 
-      alert("Order placed!")
+      alert("Order placed! You will received a confirm email shortly.")
       setCart([])
+      navigate("/")
+
     } catch (error) {
       console.log(error)
       alert("Failed to place order")
@@ -155,23 +146,53 @@ function App() {
 
   return (
     <div>
+      {
+        currentPage === "menu" && (
+          <>
+            <div className="menu-title-box">
+              <h1 className="menu-title">
+                Paul 's Kitchen
+              </h1>
+            </div>
 
-      <h1>❤️ Welcome to Paul's Kitchen ❤️</h1>
+            <Menu
+              menu={menu}
+              addToCart={addToCart}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={
+                setSelectedCategory
+              }
+            />
 
-      <Menu
-        menu={menu}
-        addToCart={addToCart}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+            <Cart
+              cart={cart}
+              removeFromCart={removeFromCart}
+              cartOpen={cartOpen}
+              setCartOpen={setCartOpen}
+              goToCheckout={() => {
+                if (cart.length === 0) {
+                  alert("Cart is empty")
+                  return
+                }
+                setCurrentPage("checkout")
+              }}
+            />
+          </>
+        )
+      }
 
-      <Cart
-        cart={cart}
-        removeFromCart={removeFromCart}
-        cartOpen={cartOpen}
-        setCartOpen={setCartOpen}
-        placeOrder={placeOrder}
-      />
+      {
+
+        currentPage === "checkout" && (
+
+          <Checkout
+            cart={cart}
+            placeOrder={placeOrder}
+            setCurrentPage={setCurrentPage}
+            verifyCode={verifyCode}
+          />
+        )
+      }
 
     </div>
   )

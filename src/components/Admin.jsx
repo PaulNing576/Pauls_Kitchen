@@ -10,9 +10,9 @@ import {
   orderBy,
   doc,
   deleteDoc,
-  addDoc
-}
-from "firebase/firestore"
+  addDoc,
+  updateDoc
+} from "firebase/firestore"
 
 import generateCode from "../utils/generateCode"
 import AdminLogin from "./AdminLogin"
@@ -21,9 +21,29 @@ function Admin() {
 
   const [authenticated, setAuthenticated] = useState(false)
   const [orders, setOrders] = useState([])
+  const [waitlist, setWaitlist] = useState([])
   const db = getFirestore(app)
 
   useEffect(() => {
+
+    const waitlistQuery = query(
+      collection(db, "waitlist"),
+      orderBy("createdAt", "desc")
+    )
+
+    const unsubscribeWaitlist =
+      onSnapshot(
+        waitlistQuery,
+        (snapshot) => {
+          const waitlistData =
+            snapshot.docs.map(doc => ({
+              id: doc.id,
+              ...doc.data()
+            }))
+          setWaitlist(waitlistData)
+        }
+      )
+
 
     const q = query(
       collection(db, "orders"),
@@ -47,7 +67,10 @@ function Admin() {
       }
     )
 
-    return () => unsubscribe()
+    return () => {
+      unsubscribe()
+      unsubscribeWaitlist()
+    }
 
   }, [])
 
@@ -73,6 +96,49 @@ function Admin() {
     alert(`New code: ${newCode}`)
   }
 
+  async function generateGuestCode() {
+    const newCode = generateCode()
+    await addDoc(
+      collection(db, "codes"),
+      {
+        code: newCode,
+        type: "guest",
+        used: false
+      }
+    )
+    alert(`Guest code: ${newCode}`)
+  }
+
+  async function approveRequest(user) {
+
+    const code = generateCode()
+
+    try {
+      await addDoc(
+        collection(db, "codes"),
+        {
+          code,
+          type: "single",
+          used: false,
+          createdAt: new Date()
+        }
+      )
+      await updateDoc(
+        doc(db, "waitlist", user.id),
+        {
+          status: "approved",
+          approvedCode: code
+        }
+      )
+      alert(
+        `${user.firstName}'s code: ${code}`
+      )
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   if (!authenticated) {
     return (
       <AdminLogin
@@ -83,6 +149,19 @@ function Admin() {
     )
   }
 
+  async function declineRequest(user) {
+    try {
+      await updateDoc(
+        doc(db, "waitlist", user.id),
+        {
+          status: "declined"
+        }
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
 
     <div className="admin-page">
@@ -91,6 +170,12 @@ function Admin() {
         onClick={generateSingleCode}
       >
         Generate Invite Code
+      </button>
+      <button
+        className="generate-guest-button"
+        onClick={generateGuestCode}
+      >
+        Generate Guest Code
       </button>
       <h1>Orders Dashboard</h1>
       {orders.map((order) => (
@@ -119,6 +204,66 @@ function Admin() {
           </button>
         </div>
       ))}
+
+      <h2>Waitlist Requests</h2>
+      {
+        waitlist.map((user) => (
+          <div
+            key={user.id}
+            className="waitlist-card"
+          >
+            <p>
+              <strong>Name:</strong>
+              {user.firstName}
+            </p>
+            <p>
+              <strong>Email:</strong>
+              {user.email}
+            </p>
+            <p>
+              <strong>Status:</strong>
+              {user.status}
+            </p>
+            {
+              user.status === "declined" && (
+                <p style={{ color: "gray" }}>
+                  Request declined
+                </p>
+              )
+            }
+            {
+              user.status === "pending" && (
+                <div className="waitlist-actions">
+                  <button
+                    className="approve-button"
+                    onClick={() =>
+                      approveRequest(user)
+                    }
+                  >
+                    Approve
+                  </button>
+                  <button
+                    className="decline-button"
+                    onClick={() =>
+                      declineRequest(user)
+                    }
+                  >
+                    Decline
+                  </button>
+                </div>
+              )
+            }
+            {
+              user.approvedCode && (
+                <p>
+                  Code:
+                  {user.approvedCode}
+                </p>
+              )
+            }
+          </div>
+        ))
+      }
     </div>
   )
 }

@@ -32,7 +32,8 @@ function Menu({
     "Rice Bowls",
     "Soup",
     "Staples",
-    "Specials"
+    "Specials",
+    "Drinks"
   ]
 
   const filteredMenu = menu.filter((item) => {
@@ -41,9 +42,7 @@ function Menu({
 
   return (
     <div className="menu-layout">
-
       <div className="sidebar">
-
         {categories.map((category) => (
           <button
             className="category-button"
@@ -54,11 +53,8 @@ function Menu({
         ))}
 
       </div>
-
       <div className="food-section">
-
         {filteredMenu.map((item, index) => (
-
           <div
             className={
               animatedItem === index
@@ -81,11 +77,8 @@ function Menu({
               alt={item.name}
             />
           </div>
-
         ))}
-
       </div>
-
     </div>
   )
 }

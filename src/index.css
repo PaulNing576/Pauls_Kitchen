@@ -60,7 +60,7 @@ h1 {
 }
 
 .enter-button {
-  background-color: pink;
+  background-color: rgb(134, 255, 219);
   color: black;
   padding: 16px 36px;
   border-radius: 999px;
@@ -76,6 +76,63 @@ h1 {
 .enter-button:hover {
   transform: scale(1.08);
   background-color: white;
+}
+
+.landing-access-box {
+  position: absolute;
+  right: 8%;
+  right: 4%;
+  bottom: 6%;
+  width: 360px;
+  padding: 36px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.landing-access-text {
+  font-family: Arial, sans-serif;
+  color: rgba(255,255,255,0.9);
+  text-align: left;
+  font-size: 17px;
+  line-height: 1.7;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.landing-input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: rgba(255,255,255,0.88);
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+.request-button {
+  width: 100%;
+  height: 54px;
+  border: none;
+  border-radius: 16px;
+  background: rgb(134, 255, 219);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.request-button:hover {
+  transform: translateY(-2px);
+  background: #f4a8b8;
 }
 
 /* ========================= Menu Layout ========================= */
@@ -105,7 +162,31 @@ h1 {
 }
 
 .category-button:hover {
-  background-color: pink;
+  background-color: rgb(164, 252, 226);
+}
+
+.menu-title-box {
+  width: fit-content;
+  margin: 30px auto;
+  padding: 0px 42px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.2);
+  border:
+    1px solid rgba(255,255,255,0.15);
+}
+
+.menu-title {
+  margin: 0;
+  color: white;
+  font-size: 54px;
+  font-family:
+    "allura",
+    cursive;
+  font-weight: 400;
+  letter-spacing: 2px;
 }
 
 .food-section {
@@ -160,7 +241,7 @@ h1 {
   text-decoration: none;
   width: 72px;
   height: 36px;
-  background-color: pink;
+  background-color: rgb(176, 255, 231);
   border: none;
   padding: 8px 12px;
   border-radius: 8px;
@@ -216,7 +297,7 @@ h1 {
   margin-top: 10px;
   border: none;
   border-radius: 10px;
-  background-color: pink;
+  background-color: rgb(176, 255, 231);
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -226,6 +307,22 @@ h1 {
   margin-top: 15px;
   text-align: right;
   margin-right: 15px;
+}
+
+.remove-button {
+  background-color: rgb(134, 255, 219);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.remove-button:hover {
+  background-color: #fcb8c7;
+  transform: scale(1.05);
 }
 
 /* ========================= Admin Dashboard ========================= */
@@ -280,6 +377,54 @@ h1 {
   background-color: #ff8fab;
 }
 
+.waitlist-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.waitlist-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.approve-button {
+  background-color: #b8f2c2;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.decline-button {
+  background-color: #ffd2d2;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.generate-guest-button {
+  background-color: #ffe0a8;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: 0.2s ease;
+}
+
+.generate-guest-button:hover {
+  transform: translateY(-2px);
+  background-color: #ffd27c;
+}
+
 /* ======================== Admin Login ========================= */
 
 .admin-login-page {
@@ -314,6 +459,119 @@ h1 {
   background-color: #ffb6c1;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* ========================= Checkout ========================== */
+
+.checkout-page {
+  min-height: 100vh;
+  background-color: rgb(238, 255, 250);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkout-steps {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.4;
+  transition: 0.25s ease;
+}
+
+.step span {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow:
+    0 4px 18px rgba(0,0,0,0.08);
+}
+
+.step p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+}
+
+.active-step {
+  opacity: 1;
+}
+
+.active-step span {
+  background-color: rgb(154, 253, 223);
+  color: black;
+}
+
+.checkout-content {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.08);
+  border:
+    1px solid rgba(255,255,255,0.3);
+}
+
+.checkout-content h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.checkout-content input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 16px;
+  background-color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.checkout-content button {
+  padding: 14px 24px;
+  margin-right: 14px;
+  border: none;
+  border-radius: 16px;
+  background-color: rgb(176, 255, 231);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.checkout-content button:hover {
+  transform: translateY(-2px);
+  background-color: rgb(157, 252, 224);
+}
+
+.checkout-content p {
+  font-size: 17px;
+  line-height: 1.8;
 }
 
 /* ========================= Mobile Responsive ========================= */
@@ -421,5 +679,50 @@ h1 {
     justify-content: center;
     align-items: center;
     word-break: break-word;
+  }
+
+  .landing-access-box {
+    position: static;
+    transform: none;
+    width: 80%;
+    margin-top: 30px;
+  }
+
+  .landing-access-text {
+    text-align: center;
+  }
+
+  .checkout-steps {
+    gap: 10px;
+  }
+
+  .step span {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  .step p {
+    font-size: 12px;
+  }
+
+  .checkout-content {
+    padding: 24px;
+  }
+
+  .checkout-content h2 {
+    font-size: 26px;
+  }
+
+  .menu-title-box {
+    padding: 5px 24px;
+    border-radius: 18px;
+    margin: 40px auto;
+  }
+
+  .menu-title {
+    font-size: 34px;
+    letter-spacing: 1px;
+    text-align: center;
   }
 }

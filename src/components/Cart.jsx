@@ -3,7 +3,7 @@ function Cart({
   removeFromCart,
   cartOpen,
   setCartOpen,
-  placeOrder
+  goToCheckout
 }) {
 
       const totalPrice = cart.reduce((total, item) => {
@@ -34,6 +34,7 @@ function Cart({
                 {item.name} x{item.quantity}
               </p>
               <button
+                className="remove-button"
                 onClick={() => removeFromCart(index)}
               >
                 Remove
@@ -45,9 +46,9 @@ function Cart({
           </h3>
           <button
             className="place-order-button"
-            onClick={placeOrder}
+            onClick={goToCheckout}
           >
-            Place Order
+            Checkout
           </button>
 
         </div>
