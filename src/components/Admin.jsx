@@ -213,15 +213,15 @@ function Admin() {
             className="waitlist-card"
           >
             <p>
-              <strong>Name:</strong>
+              <strong>Name:{" "}</strong>
               {user.firstName}
             </p>
             <p>
-              <strong>Email:</strong>
+              <strong>Email:{" "}</strong>
               {user.email}
             </p>
             <p>
-              <strong>Status:</strong>
+              <strong>Status:{" "}</strong>
               {user.status}
             </p>
             {
@@ -256,7 +256,7 @@ function Admin() {
             {
               user.approvedCode && (
                 <p>
-                  Code:
+                  Code: {" "}
                   {user.approvedCode}
                 </p>
               )

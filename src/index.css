@@ -321,7 +321,7 @@ h1 {
 }
 
 .remove-button:hover {
-  background-color: #fcb8c7;
+  background-color: rgb(95, 255, 207);
   transform: scale(1.05);
 }
 
@@ -374,6 +374,7 @@ h1 {
 }
 
 .generate-code-button:hover {
+  transform: translateY(-2px);
   background-color: #ff8fab;
 }
 
@@ -443,6 +444,7 @@ h1 {
   flex-direction: column;
   gap: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin-top: -180px
 }
 
 .admin-login-box input {
