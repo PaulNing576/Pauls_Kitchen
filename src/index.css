@@ -475,10 +475,27 @@ h1 {
 .checkout-steps {
   width: 100%;
   max-width: 900px;
+  margin: 0 auto 40px auto;
+}
+
+.checkout-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkout-label-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 50px;
+  margin-top: 16px;
+  padding: 0 6px;
+}
+
+.checkout-label-row p {
+  width: 64px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .step {
@@ -511,8 +528,34 @@ h1 {
   font-family: Arial, sans-serif;
 }
 
+.step-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.step-line {
+  flex: 1;
+  height: 4px;
+  background-color: #d8d8d8;
+  margin: 0 12px;
+}
+
+.step-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #dcdcdc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
 .active-step {
-  opacity: 1;
+  background-color: rgb(176, 255, 231);
 }
 
 .active-step span {
@@ -552,9 +595,26 @@ h1 {
   outline: none;
 }
 
-.checkout-content button {
+.checkout-content input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  border: 2px solid #d8d8d8;
+  font-size: 16px;
+  margin-top: 20px;
+  background-color: white;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.checkout-buttons {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.checkout-primary-button {
   padding: 14px 24px;
-  margin-right: 14px;
   border: none;
   border-radius: 16px;
   background-color: rgb(176, 255, 231);
@@ -564,14 +624,73 @@ h1 {
   transition: 0.25s ease;
 }
 
-.checkout-content button:hover {
+.checkout-primary-button:hover {
   transform: translateY(-2px);
   background-color: rgb(157, 252, 224);
+}
+
+.checkout-secondary-button {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 16px;
+  background-color: #ececec;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.checkout-secondary-button:hover {
+  transform: translateY(-2px);
+  background-color: rgb(193, 193, 193);
 }
 
 .checkout-content p {
   font-size: 17px;
   line-height: 1.8;
+}
+
+.reservation-date-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.selected-time-box {
+  min-width: 140px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background-color:
+    rgb(176, 255, 231);
+  font-weight: 600;
+  text-align: center;
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+.time-slot {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background-color: rgb(234, 255, 249);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.time-slot:hover {
+  transform: translateY(-2px);
+}
+
+.selected-slot {
+  background-color: rgb(133, 251, 216);
+  font-weight: bold;
+  transform: scale(1.05);
 }
 
 /* ========================= Mobile Responsive ========================= */

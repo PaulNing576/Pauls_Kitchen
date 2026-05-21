@@ -8,6 +8,10 @@ function Checkout({
 }) {
 
   const [step, setStep] = useState(1)
+  const [selectedDate, setSelectedDate] =
+    useState("")
+  const [selectedTime, setSelectedTime] =
+    useState("")
 
   const [accessCode, setAccessCode] =
     useState("")
@@ -24,6 +28,39 @@ function Checkout({
 
   function nextStep() {
     setStep(step + 1)
+  }
+
+  function generateTimeSlots() {
+    const slots = []
+    for (
+      let hour = 17;
+      hour <= 21;
+      hour++
+    ) {
+      for (
+        let minute = 0;
+        minute < 60;
+        minute += 15
+      ) {
+        const h =
+          hour > 12
+            ? hour - 12
+            : hour
+
+        const m =
+          minute
+            .toString()
+            .padStart(2, "0")
+
+        const suffix =
+          hour >= 12 ? "PM" : "AM"
+
+        slots.push(
+          `${h}:${m} ${suffix}`
+        )
+      }
+    }
+    return slots
   }
 
   async function handleVerifyCode() {
@@ -43,57 +80,57 @@ function Checkout({
 
   function prevStep() {
     setStep(step - 1)
-  }
+  } 
 
   return (
     <div className="checkout-page">
       {/* STEP BAR */}
       <div className="checkout-steps">
-        
-        <div
-          className={
-            step >= 1
-              ? "step active-step"
-              : "step"
-          }
-        >
-          <span>1</span>
+        <div className="checkout-progress-row">
+          <div className="step-circle active-step">
+            1
+          </div>
+          <div className="step-line"></div>
+
+          <div
+            className={
+              step >= 2
+                ? "step-circle active-step"
+                : "step-circle"
+            }
+          >
+            2
+          </div>
+          <div className="step-line"></div>
+
+          <div
+            className={
+              step >= 3
+                ? "step-circle active-step"
+                : "step-circle"
+            }
+          >
+            3
+          </div>
+          <div className="step-line"></div>
+
+          <div
+            className={
+              step >= 4
+                ? "step-circle active-step"
+                : "step-circle"
+            }
+          >
+            4
+          </div>
+        </div>
+
+        <div className="checkout-label-row">
           <p>Order</p>
-        </div>
-
-        <div
-          className={
-            step >= 2
-              ? "step active-step"
-              : "step"
-          }
-        >
-          <span>2</span>
           <p>Access</p>
-        </div>
-
-        <div
-          className={
-            step >= 3
-              ? "step active-step"
-              : "step"
-          }
-        >
-          <span>3</span>
           <p>Schedule</p>
-        </div>
-
-        <div
-          className={
-            step >= 4
-              ? "step active-step"
-              : "step"
-          }
-        >
-          <span>4</span>
           <p>Payment</p>
         </div>
-
       </div>
 
       {/* STEP CONTENT */}
@@ -103,19 +140,15 @@ function Checkout({
         {
 
           step === 1 && (
-
+            
             <div>
-
               <h2>
                 Confirm Your Order
               </h2>
 
               {
-
                 cart.map((item) => (
-
                   <p key={item.name}>
-
                     {item.name}
                     x{item.quantity}
 
@@ -127,18 +160,22 @@ function Checkout({
                 Total: ${total}
               </h3>
 
-              <button
-                onClick={() =>
-                  setCurrentPage("menu")
-                }
-              >
-                Back to Menu
-              </button>
+              <div className="checkout-buttons">
+                <button
+                  className="checkout-secondary-button"
+                  onClick={() =>
+                    setCurrentPage("menu")
+                  }
+                >
+                  Back to Menu
+                </button>
 
-              <button onClick={nextStep}>
-                Continue
-              </button>
-
+                <button 
+                  className="checkout-primary-button"
+                  onClick={nextStep}>
+                  Continue
+                </button>
+              </div>
             </div>
           )
         }
@@ -164,14 +201,18 @@ function Checkout({
                   </p>
                 )
               }
-
-              <button onClick={prevStep}>
-                Back
-              </button>
-              <button onClick={handleVerifyCode}>
-                Verify
-              </button>
-
+              <div className="checkout-buttons">
+                <button
+                  className="checkout-secondary-button" 
+                  onClick={prevStep}>
+                  Back
+                </button>
+                <button 
+                  className="checkout-primary-button"
+                  onClick={handleVerifyCode}>
+                  Verify
+                </button>
+              </div>
             </div>
           )
         }
@@ -179,23 +220,87 @@ function Checkout({
         {
 
           step === 3 && (
-
-            <div>
-
+            <div className="checkout-step">
               <h2>
                 Select Reservation Time
               </h2>
+              <input
+                type="date"
+                value={selectedDate}
+                min={
+                  new Date(
+                    Date.now()
+                    + 3 * 24 * 60 * 60 * 1000
+                  )
+                  .toISOString()
+                  .split("T")[0]
+                }
+                onChange={(e) =>
+                  setSelectedDate(e.target.value)
+                }
+                onKeyDown={(e) =>
+                  e.preventDefault()
+                }
+              />
 
-              <input type="datetime-local" />
+              {
+                selectedTime && (
+                  <p className="selected-time-text">
+                    Selected Time: {" "}
+                    {selectedTime}
+                  </p>
+                )
+              }
 
-              <button onClick={prevStep}>
-                Back
-              </button>
+              <div className="time-slots">
+                {
+                  generateTimeSlots().map((slot) => (
+                    <button
+                      key={slot}
+                      className={
+                        selectedTime === slot
+                          ? "time-slot selected-slot"
+                          : "time-slot"
+                      }
+                      onClick={() =>
+                        setSelectedTime(slot)
+                      }
+                    >
+                      {slot}
+                    </button>
+                  ))
+                }
+              </div>
 
-              <button onClick={nextStep}>
-                Continue
-              </button>
+              <div className="checkout-buttons">
+                <button 
+                  className="checkout-secondary-button"
+                  onClick={prevStep}>
+                  Back
+                </button>
+                <button
+                  className="checkout-primary-button"
+                  onClick={() => {
+                    if (!selectedDate) {
+                      alert(
+                        "Please select a date"
+                      )
+                      return
+                    }
 
+                    if (!selectedTime) {
+                      alert(
+                        "Please select a time"
+                      )
+                      return
+                    }
+
+                    nextStep()
+                  }}
+                >
+                  Continue
+                </button>
+              </div>
             </div>
           )
         }
@@ -232,17 +337,27 @@ function Checkout({
                   </>
                 )
               }
-
-              <button onClick={prevStep}>
-                Back
-              </button>
-              <button
-                onClick={() =>
-                  placeOrder(verifiedCodeData)
-                }
-              >
-                Place Order
-              </button>
+              <div className="checkout-buttons">
+                <button 
+                  className="checkout-secondary-button"
+                  onClick={prevStep}>
+                  Back
+                </button>
+                <button
+                  className="checkout-primary-button"
+                  onClick={() =>
+                    placeOrder(
+                      verifiedCodeData,
+                      {
+                        date: selectedDate,
+                        time: selectedTime
+                      }
+                    )
+                  }
+                >
+                  Place Order
+                </button>
+              </div>
             </div>
           )
         }

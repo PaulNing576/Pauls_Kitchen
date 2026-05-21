@@ -111,12 +111,16 @@ function App() {
     }
   }
 
-  async function placeOrder(codeData) {
+  async function placeOrder(
+    codeData,
+    reservationTime
+  ) {
     try {
       await addDoc(
         collection(db, "orders"),
         {
           items: cart,
+          reservationTime,
           createdAt: new Date()
         }
       )
