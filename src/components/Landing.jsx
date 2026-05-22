@@ -58,37 +58,6 @@ function Landing() {
         <h1 className="landing-title">
            Paul 's Kitchen 
         </h1>
-        <div className="landing-subtitle">
-          <div className="landing-access-box">
-            <p className="landing-access-text">
-              Please prepare your access code from Paul.
-              <br />
-              If you don't have it yet,
-              request one from below.
-            </p>
-            <input
-              type="text"
-              placeholder="First Name"
-              className="landing-input"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              className="landing-input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button
-              className="request-button"
-              onClick={handleRequestAccess}
-            >
-              Request Access
-            </button>
-          </div>
-          Homemade food made with love
-        </div>
 
         <Link
           to="/menu"
@@ -97,6 +66,38 @@ function Landing() {
           Enter Menu
         </Link>
 
+        <div className="landing-subtitle">
+          Homemade food made with love
+        </div>
+
+        <div className="landing-access-box">
+          <p className="landing-access-text">
+            Please prepare your access code from Paul.
+            <br />
+            If you don't have it yet,
+            request one from below.
+          </p>
+          <input
+            type="text"
+            placeholder="First Name"
+            className="landing-input"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            className="landing-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button
+            className="request-button"
+            onClick={handleRequestAccess}
+          >
+            Request Access
+          </button>
+        </div>
       </div>
     </div>
   )

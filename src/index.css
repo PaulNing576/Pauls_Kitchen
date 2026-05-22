@@ -54,7 +54,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 48px;
   color: white;
   z-index: 2;
 }
@@ -87,7 +87,7 @@ h1 {
   padding: 36px;
   border-radius: 28px;
   background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(3px);
   border: 1px solid rgba(255,255,255,0.15);
   box-shadow: 0 10px 40px rgba(0,0,0,0.35);
   display: flex;
@@ -123,7 +123,7 @@ h1 {
   height: 54px;
   border: none;
   border-radius: 16px;
-  background: rgb(134, 255, 219);
+  background: rgb(157, 255, 226);
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -132,7 +132,7 @@ h1 {
 
 .request-button:hover {
   transform: translateY(-2px);
-  background: #f4a8b8;
+  background: rgb(113, 255, 212);
 }
 
 /* ========================= Menu Layout ========================= */
@@ -266,6 +266,8 @@ h1 {
 
 .cart-header {
   cursor: pointer;
+  display: flex;
+  gap: 24px;
 }
 
 .cart-bar {
@@ -275,8 +277,8 @@ h1 {
   background-color: white;
   border-top: 1px solid #ddd;
   padding: 10px;
-  max-height: 180px;
-  overflow-y: auto;
+  max-height: 40%;
+  overflow-y: scroll;
 }
 
 .cart-item {
@@ -289,10 +291,28 @@ h1 {
   margin-right: 30px;
 }
 
+.cart-toggle-button {
+  background-color: rgb(176, 255, 231);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  height: 50%;
+  align-self: center;
+}
+
+.cart-toggle-button:hover {
+  background-color: rgb(95, 255, 207);
+  transform: translateY(-2px);
+}
+
 .place-order-button {
   color: black;
   text-decoration: none;
-  width: 100%;
+  width: 99%;
   padding: 12px;
   margin-top: 10px;
   border: none;
@@ -303,10 +323,14 @@ h1 {
   cursor: pointer;
 }
 
+.place-order-button:hover {
+  background-color: rgb(95, 255, 207);
+}
+
 .total-price {
   margin-top: 15px;
   text-align: right;
-  margin-right: 15px;
+  margin-right: 30px;
 }
 
 .remove-button {
@@ -322,7 +346,7 @@ h1 {
 
 .remove-button:hover {
   background-color: rgb(95, 255, 207);
-  transform: scale(1.05);
+  transform: translateY(-2px);
 }
 
 /* ========================= Admin Dashboard ========================= */
@@ -699,18 +723,39 @@ h1 {
 
 @media (max-width: 768px) {
   .landing-title {
-    font-size: 42px;
+    font-size: 46px;
   }
 
   .landing-subtitle {
-    font-size: 18px;
+    font-size: 28px;
+    font-weight: 300;
     text-align: center;
-    padding: 0 20px;
+    padding: 20px;
   }
 
   .enter-button {
     padding: 14px 28px;
     font-size: 16px;
+  }
+
+  .landing-access-box {
+    position: static;
+    transform: none;
+    width: 80%;
+    padding: 20px 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .landing-access-text {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .landing-overlay {
+    gap: 0px;
+    padding-top: 180px;
   }
 
   .menu-layout {
@@ -802,17 +847,6 @@ h1 {
     word-break: break-word;
   }
 
-  .landing-access-box {
-    position: static;
-    transform: none;
-    width: 80%;
-    margin-top: 30px;
-  }
-
-  .landing-access-text {
-    text-align: center;
-  }
-
   .checkout-steps {
     gap: 10px;
   }
@@ -833,6 +867,10 @@ h1 {
 
   .checkout-content h2 {
     font-size: 26px;
+  }
+
+  .place-order-button {
+    width: 95%;
   }
 
   .menu-title-box {

@@ -16,7 +16,6 @@ function Cart({
     <div className="cart-bar">
       <div
         className="cart-header"
-        onClick={() => setCartOpen(!cartOpen)}
       >
         <h3>
           🛒 Cart (
@@ -25,6 +24,22 @@ function Cart({
           }, 0)}
           )
         </h3>
+        {!cartOpen && (
+          <button
+            className="cart-toggle-button"
+            onClick={() => setCartOpen(!cartOpen)}
+          >
+            Open Cart
+          </button>
+        )}
+        {cartOpen && (
+          <button
+            className="cart-toggle-button"
+            onClick={() => setCartOpen(!cartOpen)}
+          >
+            Close Cart
+          </button>
+        )}
       </div>
       {cartOpen && (
         <div>
