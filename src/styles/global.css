@@ -1,0 +1,18 @@
+/* ========================= Global ========================= */
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background-color: #e7f8ff;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+}
+
+/* ========================= Mobile Responsive ========================= */
+
+@media (max-width: 768px) {
+
+}

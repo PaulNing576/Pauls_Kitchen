@@ -2,6 +2,12 @@ import { useState } from "react"
 
 import imageMap from "../utils/imageMap"
 
+/* ui imports */
+import Button from "../components/ui/Button"
+import Input from "../components/ui/Input"
+import Card from "../components/ui/Card"
+import Modal from "../components/ui/Modal"
+
 function Menu({
   menu,
   addToCart,
@@ -67,11 +73,12 @@ function Menu({
             <div className="food-info">
               <h3>{item.name}</h3>
               <p>${item.price}</p>
-              <button
+              <Button
+                type="tertiary"
                 onClick={() => handleAddToCart(item, index)}
               >
                 Add
-              </button>
+              </Button>
             </div>
             <img
               className="food-image"

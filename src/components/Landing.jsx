@@ -13,16 +13,33 @@ import {
 
 import app from "../firebase"
 
+/* ui imports */
+import Button from "../components/ui/Button"
+import Input from "../components/ui/Input"
+import Card from "../components/ui/Card"
+import Modal from "../components/ui/Modal"
+
 function Landing() {
   
   const db = getFirestore(app)
   const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
+  const [modalData, setModalData] =
+    useState({
+      open: false,
+      title: "",
+      message: ""
+    })
   
   async function handleRequestAccess() {
 
     if (!firstName || !email) {
-      alert("Please fill out all fields")
+      setModalData({
+        open: true,
+        title: "Missing Information",
+        message:
+          "Please fill out all fields."
+      })
       return
     }
 
@@ -37,7 +54,12 @@ function Landing() {
         }
       )
 
-      alert("Request submitted!")
+      setModalData({
+        open: true,
+        title: "Request Submitted",
+        message:
+          "Paul will review your request shortly."
+      })
       setFirstName("")
       setEmail("")
 
@@ -70,35 +92,46 @@ function Landing() {
           Homemade food made with love
         </div>
 
-        <div className="landing-access-box">
+        <Card className="landing-access-box">
           <p className="landing-access-text">
             Please prepare your access code from Paul.
             <br />
             If you don't have it yet,
             request one from below.
           </p>
-          <input
-            type="text"
+          <Input
             placeholder="First Name"
-            className="landing-input"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
-          <input
+          <Input
             type="email"
             placeholder="Email"
-            className="landing-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button
-            className="request-button"
+          <Button
+            type="tertiary"
             onClick={handleRequestAccess}
           >
             Request Access
-          </button>
-        </div>
+          </Button>
+        </Card>
       </div>
+
+      <Modal
+        isOpen={modalData.open}
+        title={modalData.title}
+        onClose={() =>
+          setModalData({
+            open: false,
+            title: "",
+            message: ""
+          })
+        }
+      >
+        {modalData.message}
+      </Modal>
     </div>
   )
 }

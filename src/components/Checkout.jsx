@@ -1,5 +1,11 @@
 import { useState } from "react"
 
+/* ui imports */
+import Button from "../components/ui/Button"
+import Input from "../components/ui/Input"
+import Card from "../components/ui/Card"
+import Modal from "../components/ui/Modal"
+
 function Checkout({
   cart,
   placeOrder,
@@ -25,6 +31,13 @@ function Checkout({
       sum + item.price * item.quantity,
     0
   )
+
+  const [modalData, setModalData] =
+    useState({
+      open: false,
+      title: "",
+      message: ""
+    })
 
   function nextStep() {
     setStep(step + 1)
@@ -69,7 +82,12 @@ function Checkout({
         await verifyCode(accessCode)
 
     if (!codeData) {
-        alert("Invalid or used code")
+        setModalData({
+          open: true,
+          title: "Invalid Code",
+          message:
+            "Invalid or used code. Please check the code you typed"
+        })
         return
     }
 
@@ -135,7 +153,7 @@ function Checkout({
 
       {/* STEP CONTENT */}
 
-      <div className="checkout-content">
+      <Card className="checkout-content">
 
         {
 
@@ -161,20 +179,20 @@ function Checkout({
               </h3>
 
               <div className="checkout-buttons">
-                <button
-                  className="checkout-secondary-button"
+                <Button
+                  type="secondary"
                   onClick={() =>
                     setCurrentPage("menu")
                   }
                 >
                   Back to Menu
-                </button>
+                </Button>
 
-                <button 
-                  className="checkout-primary-button"
+                <Button 
+                  type="primary"
                   onClick={nextStep}>
                   Continue
-                </button>
+                </Button>
               </div>
             </div>
           )
@@ -186,7 +204,7 @@ function Checkout({
               <h2>
                 Enter Access Code
               </h2>
-              <input
+              <Input
                 value={accessCode}
                 onChange={(e) =>
                   setAccessCode(e.target.value)
@@ -202,16 +220,16 @@ function Checkout({
                 )
               }
               <div className="checkout-buttons">
-                <button
-                  className="checkout-secondary-button" 
+                <Button
+                  type="secondary" 
                   onClick={prevStep}>
                   Back
-                </button>
-                <button 
-                  className="checkout-primary-button"
+                </Button>
+                <Button 
+                  type="primary" 
                   onClick={handleVerifyCode}>
                   Verify
-                </button>
+                </Button>
               </div>
             </div>
           )
@@ -224,7 +242,7 @@ function Checkout({
               <h2>
                 Select Reservation Time
               </h2>
-              <input
+              <Input
                 type="date"
                 value={selectedDate}
                 min={
@@ -273,33 +291,38 @@ function Checkout({
               </div>
 
               <div className="checkout-buttons">
-                <button 
-                  className="checkout-secondary-button"
+                <Button 
+                  type="secondary" 
                   onClick={prevStep}>
                   Back
-                </button>
-                <button
-                  className="checkout-primary-button"
+                </Button>
+                <Button 
+                  type="primary" 
                   onClick={() => {
                     if (!selectedDate) {
-                      alert(
-                        "Please select a date"
-                      )
+                      setModalData({
+                        open: true,
+                        title: "Missing Information",
+                        message:
+                          "Please select a date."
+                      })
                       return
                     }
 
                     if (!selectedTime) {
-                      alert(
-                        "Please select a time"
-                      )
+                      setModalData({
+                        open: true,
+                        title: "Missing Information",
+                        message:
+                          "Please select a time."
+                      })
                       return
                     }
-
                     nextStep()
                   }}
                 >
                   Continue
-                </button>
+                </Button>
               </div>
             </div>
           )
@@ -338,13 +361,13 @@ function Checkout({
                 )
               }
               <div className="checkout-buttons">
-                <button 
-                  className="checkout-secondary-button"
+                <Button 
+                  type="secondary" 
                   onClick={prevStep}>
                   Back
-                </button>
-                <button
-                  className="checkout-primary-button"
+                </Button>
+                <Button 
+                  type="primary" 
                   onClick={() =>
                     placeOrder(
                       verifiedCodeData,
@@ -356,12 +379,26 @@ function Checkout({
                   }
                 >
                   Place Order
-                </button>
+                </Button>
               </div>
             </div>
           )
         }
-      </div>
+      </Card>
+
+      <Modal
+        isOpen={modalData.open}
+        title={modalData.title}
+        onClose={() =>
+          setModalData({
+            open: false,
+            title: "",
+            message: ""
+          })
+        }
+      >
+        {modalData.message}
+      </Modal>
     </div>
   )
 }

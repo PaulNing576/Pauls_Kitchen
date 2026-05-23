@@ -6,6 +6,8 @@ import Cart from "./components/Cart"
 import menu from "./data/menu"
 import Checkout from "./components/Checkout"
 
+/* ui imports */
+
 import app from "./firebase"
 
 import {
@@ -197,7 +199,6 @@ function App() {
           />
         )
       }
-
     </div>
   )
 }

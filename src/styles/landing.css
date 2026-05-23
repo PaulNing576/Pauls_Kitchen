@@ -1,0 +1,133 @@
+/* ========================= Landing Page ========================= */
+
+.landing-title {
+  font-family: 'Allura', cursive;
+  font-size: 130px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  letter-spacing: 2px;
+}
+
+.landing-subtitle {
+  font-family: 'Allura', cursive;
+  font-size: 50px;
+  font-weight: 700;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+.landing-page {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.landing-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  color: white;
+  z-index: 2;
+}
+
+.enter-button {
+  background-color: rgb(134, 255, 219);
+  color: black;
+  padding: 16px 36px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  display: inline-block;
+}
+
+.enter-button:hover {
+  transform: scale(1.08);
+  background-color: white;
+}
+
+.landing-access-box {
+  position: absolute;
+  right: 8%;
+  right: 4%;
+  bottom: 6%;
+  width: 360px;
+  padding: 36px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.landing-access-text {
+  font-family: Arial, sans-serif;
+  color: rgba(255,255,255,0.9);
+  text-align: left;
+  font-size: 17px;
+  line-height: 1.7;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* ========================= Mobile Responsive ========================= */
+
+@media (max-width: 768px) {
+  .landing-title {
+    font-size: 46px;
+  }
+
+  .landing-subtitle {
+    font-size: 28px;
+    font-weight: 300;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .enter-button {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+
+  .landing-access-box {
+    position: static;
+    transform: none;
+    width: 80%;
+    padding: 20px 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .landing-access-text {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .landing-overlay {
+    gap: 0px;
+    padding-top: 180px;
+  }
+}

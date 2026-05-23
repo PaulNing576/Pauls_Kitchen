@@ -11,7 +11,12 @@ import App from './App'
 import Admin from './components/Admin'
 import Landing from './components/Landing'
 
-import './index.css'
+import "./styles/global.css"
+import "./styles/landing.css"
+import "./styles/menu.css"
+import "./styles/checkout.css"
+import "./styles/admin.css"
+import "./styles/cart.css"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 

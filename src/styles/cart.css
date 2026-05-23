@@ -1,0 +1,78 @@
+/* ========================= Cart ========================= */
+
+.cart-header {
+  cursor: pointer;
+  display: flex;
+  gap: 24px;
+}
+
+.cart-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  max-height: 40%;
+  overflow-y: scroll;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item button {
+  margin-right: 30px;
+}
+
+.cart-toggle-button {
+  background-color: rgb(176, 255, 231);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  height: 50%;
+  align-self: center;
+}
+
+.cart-toggle-button:hover {
+  background-color: rgb(95, 255, 207);
+  transform: translateY(-2px);
+}
+
+.place-order-button {
+  color: black;
+  text-decoration: none;
+  width: 99%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(176, 255, 231);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.place-order-button:hover {
+  background-color: rgb(95, 255, 207);
+}
+
+.total-price {
+  margin-top: 15px;
+  text-align: right;
+  margin-right: 30px;
+}
+
+/* ========================= Mobile Responsive ========================= */
+
+@media (max-width: 768px) {
+  .place-order-button {
+    width: 95%;
+  }
+}

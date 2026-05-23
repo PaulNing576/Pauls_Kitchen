@@ -1,0 +1,18 @@
+.ui-input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  border: 2px solid #95ffef;
+  background-color: white;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s ease;
+  box-sizing: border-box;
+}
+
+.ui-input:focus {
+  border-color: rgb(176, 255, 231);
+  box-shadow:
+    0 0 0 4px
+    rgba(176,255,231,0.25);
+}

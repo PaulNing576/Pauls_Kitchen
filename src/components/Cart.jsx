@@ -1,3 +1,9 @@
+/* ui imports */
+import Button from "../components/ui/Button"
+import Input from "../components/ui/Input"
+import Card from "../components/ui/Card"
+import Modal from "../components/ui/Modal"
+
 function Cart({
   cart,
   removeFromCart,
@@ -51,12 +57,12 @@ function Cart({
               <p>
                 {item.name} x{item.quantity}
               </p>
-              <button
-                className="remove-button"
+              <Button
+                type="tertiary"
                 onClick={() => removeFromCart(index)}
               >
                 Remove
-              </button>
+              </Button>
             </div>
           ))}
           <h3 className="total-price">

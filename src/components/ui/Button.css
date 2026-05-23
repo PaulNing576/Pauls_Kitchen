@@ -1,0 +1,37 @@
+.ui-button {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.ui-button:hover {
+  transform: translateY(-2px);
+}
+
+.ui-button.primary {
+  background-color: rgb(176, 255, 231);
+  color: black;
+}
+
+.ui-button.secondary {
+  background-color: #e5e5e5;
+  color: black;
+}
+
+.ui-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ui-button.tertiary {
+  background-color: #dffaf1;
+  color: black;
+}
+
+.ui-button.tertiary:hover {
+  background-color: #cff5e8;
+}

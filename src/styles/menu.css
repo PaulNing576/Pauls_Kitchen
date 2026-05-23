@@ -1,0 +1,231 @@
+/* ========================= Menu Layout ========================= */
+
+.menu-layout {
+  display: flex;
+  height: calc(100vh - 180px);
+}
+
+.sidebar {
+  width: 150px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+}
+
+.category-button {
+  color: black;
+  text-decoration: none;
+  border: none;
+  background: none;
+  padding: 20px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.category-button:hover {
+  background-color: rgb(164, 252, 226);
+}
+
+.menu-title-box {
+  width: fit-content;
+  margin: 30px auto;
+  padding: 0px 42px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.2);
+  border:
+    1px solid rgba(255,255,255,0.15);
+}
+
+.menu-title {
+  margin: 0;
+  color: white;
+  font-size: 54px;
+  font-family:
+    "allura",
+    cursive;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.food-section {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  padding-bottom: 150px;
+}
+
+/* ========================= Food Cards ========================= */
+
+.food-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.food-image {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: transform 0.25s ease;
+}
+
+.food-card:hover .food-image {
+  transform: scale(1.05);
+}
+
+.food-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.food-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.food-card button {
+  color: black;
+  text-decoration: none;
+  width: 72px;
+  height: 36px;
+  background-color: rgb(176, 255, 231);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.animate {
+  animation: pop 0.3s ease;
+}
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ========================= Mobile Responsive ========================= */
+
+@media (max-width: 768px) {
+  .menu-layout {
+    display: flex;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .menu-title-box {
+    padding: 5px 24px;
+    border-radius: 18px;
+    margin: 40px auto;
+  }
+
+  .menu-title {
+    font-size: 34px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .sidebar {
+    width: 95px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    flex-shrink: 0;
+    padding-top: 20px;
+    padding-bottom: 70px;
+  }
+
+  .sidebar button {
+    width: 80px;
+    height: 70px;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 16px;
+    margin-bottom: 14px;
+  }
+
+  .food-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .food-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 16px;
+    align-self: center;
+  }
+
+  .food-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .food-info h2 {
+    margin-top: 0px;
+    margin-bottom: 8px;
+  }
+
+  .food-info button {
+    margin-top: 6px;
+  }
+
+  .food-section {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .food-card button {
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .food-info p {
+    margin: 0;
+  }
+
+  .category-button {
+    width: 72px;
+    height: 72px;
+    font-size: clamp(11px, 2vw, 16px);
+    line-height: 1.1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-break: break-word;
+  }
+}
