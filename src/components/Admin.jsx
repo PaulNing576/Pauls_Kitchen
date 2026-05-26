@@ -130,9 +130,30 @@ function Admin() {
           approvedCode: code
         }
       )
+
+      const response =
+        await fetch(
+          "https://us-central1-pauls-kitchen-bf4e6.cloudfunctions.net/sendApprovalEmailHttp",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+            body: JSON.stringify({
+              email: user.email,
+              code: code
+            })
+          }
+        )
+
       alert(
         `${user.firstName}'s code: ${code}`
       )
+
+      const result =
+        await response.json()
+      console.log(result)
 
     } catch (error) {
       console.error(error)
@@ -208,6 +229,10 @@ function Admin() {
       <h2>Waitlist Requests</h2>
       {
         waitlist.map((user) => (
+
+          <div
+            key={user.id}
+          >
           <div
             key={user.id}
             className="waitlist-card"
@@ -261,6 +286,7 @@ function Admin() {
                 </p>
               )
             }
+          </div>
           </div>
         ))
       }
