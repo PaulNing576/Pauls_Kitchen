@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const functions =
   require("firebase-functions");
 
@@ -10,9 +12,7 @@ const cors =
   });
 
 const resend =
-  new Resend(
-    "re_AABGANQo_85d5uWcR6NVJPYRzKtUdFyKK"
-  );
+  new Resend(process.env.RESEND_API_KEY);
 
 exports.sendApprovalEmailHttp =
   functions.https.onRequest(
