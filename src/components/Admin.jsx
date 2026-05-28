@@ -18,12 +18,17 @@ import { httpsCallable } from "firebase/functions"
 import generateCode from "../utils/generateCode"
 import AdminLogin from "./AdminLogin"
 import { useAuth } from "../contexts/AuthContext"
+import useBrowserNotification from "../hooks/useBrowserNotification"
+import useNewItemDetector from "../hooks/useNewItemDetector"
+import { ToastContainer } from "./ui/Toast"
 
 function Admin() {
 
   const { user, isAdmin, loading, signOut } = useAuth()
   const [orders, setOrders] = useState([])
   const [waitlist, setWaitlist] = useState([])
+  const [toasts, setToasts] = useState([])
+  const { notify } = useBrowserNotification()
   useEffect(() => {
 
     if (!isAdmin) return
@@ -75,6 +80,32 @@ function Admin() {
     }
 
   }, [isAdmin, db])
+
+  function addToast(toast) {
+    const id = crypto.randomUUID()
+    setToasts((prev) => [...prev, { ...toast, id }])
+  }
+
+  function dismissToast(id) {
+    setToasts((prev) => prev.filter((t) => t.id !== id))
+  }
+
+  useNewItemDetector(waitlist, "id", (item) => {
+    const title = "New Waitlist Request"
+    const body = `${item.firstName} (${item.email}) is requesting access`
+    addToast({ title, body, type: "waitlist" })
+    notify(title, { body })
+  })
+
+  useNewItemDetector(orders, "id", (order) => {
+    const itemCount = order.items?.length || 0
+    const preview = order.items?.slice(0, 3).map((i) => i.name).join(", ")
+    const suffix = order.items?.length > 3 ? ` and ${order.items.length - 3} more` : ""
+    const title = "New Order Received"
+    const body = `${itemCount} item(s): ${preview}${suffix}`
+    addToast({ title, body, type: "order" })
+    notify(title, { body })
+  })
 
   async function completeOrder(orderId) {
 
@@ -292,6 +323,7 @@ function Admin() {
           </div>
         ))
       }
+      <ToastContainer toasts={toasts} onDismiss={dismissToast} />
     </div>
   )
 }

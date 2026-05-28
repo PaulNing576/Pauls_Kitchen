@@ -47,6 +47,7 @@ This project is designed as a full stack product focused on scalable architectur
     - Manual access code generation  
     - Reservation management  
     - Real-time Firestore integration  
+    - Browser notification system for new waitlist requests and orders  
 
 ### Tech Stack Summary
 
@@ -81,7 +82,6 @@ Responsive Experience:
     - Stripe payment  
     - Analytics dashboard  
     - Customer accounts  
-    - Frontend & Backend notification system  
     - Domain-based email 
 
 **Recipe:**  

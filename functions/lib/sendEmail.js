@@ -7,10 +7,12 @@ const {isValidEmail} = require("./validators");
 const FROM_ADDRESS = process.env.FROM_EMAIL || "Paul's Kitchen <onboarding@resend.dev>";
 
 function getDb() {
-  if (admin.apps.length === 0) {
+  try {
+    return admin.firestore();
+  } catch {
     admin.initializeApp();
+    return admin.firestore();
   }
-  return admin.firestore();
 }
 
 async function logMail(entry) {

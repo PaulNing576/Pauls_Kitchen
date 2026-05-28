@@ -15,17 +15,13 @@ service cloud.firestore {
     }
 
     // ---------------- waitlist ----------------
-    // Public can create a waitlist entry (the landing page form).
+    // Writes go through the submitWaitlist Cloud Function (rate-limited).
     // Only admins may read, update, or delete.
     match /waitlist/{id} {
 
-      allow create: if
-        request.resource.data.keys().hasOnly(
-          ['firstName', 'email', 'status', 'createdAt']
-        )
-        && request.resource.data.firstName is string
-        && request.resource.data.email is string
-        && request.resource.data.status == 'pending';
+      // Waitlist entries are created through the submitWaitlist Cloud Function
+      // (Admin SDK bypasses rules). Direct client writes are not allowed.
+      allow create: if isAdmin();
 
       allow read, update, delete: if isAdmin();
     }

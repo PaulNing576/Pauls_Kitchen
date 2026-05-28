@@ -4,14 +4,9 @@ import bgImage from "../images/landingBG.png"
 
 import { useState } from "react"
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp
-} from "firebase/firestore"
+import { httpsCallable } from "firebase/functions"
 
-import app from "../firebase"
+import { functions } from "../firebase"
 
 /* ui imports */
 import Button from "../components/ui/Button"
@@ -20,8 +15,7 @@ import Card from "../components/ui/Card"
 import Modal from "../components/ui/Modal"
 
 function Landing() {
-  
-  const db = getFirestore(app)
+
   const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
   const [modalData, setModalData] =
@@ -44,15 +38,8 @@ function Landing() {
     }
 
     try {
-      await addDoc(
-        collection(db, "waitlist"),
-        {
-          firstName,
-          email,
-          status: "pending",
-          createdAt: serverTimestamp()
-        }
-      )
+      const submitWaitlist = httpsCallable(functions, "submitWaitlist");
+      await submitWaitlist({ firstName, email });
 
       setModalData({
         open: true,
@@ -65,7 +52,14 @@ function Landing() {
 
     } catch (error) {
       console.error(error)
-      alert("Something went wrong")
+      const message = error.code === "functions/resource-exhausted"
+        ? "System busy, please try again later"
+        : "Something went wrong, please try again";
+      setModalData({
+        open: true,
+        title: "Error",
+        message,
+      })
     }
   }
 

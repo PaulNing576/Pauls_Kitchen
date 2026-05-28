@@ -3,6 +3,7 @@ const {defineSecret} = require("firebase-functions/params");
 const {setGlobalOptions} = require("firebase-functions/v2");
 
 const {sendEmailCore} = require("./lib/sendEmail");
+const {submitWaitlistCore} = require("./lib/submitWaitlist");
 const {assertCallerIsAdmin} = require("./lib/validators");
 
 const RESEND_API_KEY = defineSecret("RESEND_API_KEY");
@@ -43,6 +44,20 @@ exports.sendEmail = onCall(
       } catch (e) {
         const code = e.code || "internal";
         throw new HttpsError(code, e.message, {cause: e.cause});
+      }
+    },
+);
+
+exports.submitWaitlist = onCall(
+    {cors: true},
+    async (request) => {
+      const {firstName, email} = request.data || {};
+      try {
+        return await submitWaitlistCore({firstName, email});
+      } catch (e) {
+        const known = ["invalid-argument", "resource-exhausted"];
+        const code = known.includes(e.code) ? e.code : "internal";
+        throw new HttpsError(code, e.message);
       }
     },
 );
