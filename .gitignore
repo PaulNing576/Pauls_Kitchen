@@ -4,3 +4,9 @@ dist
 functions/.env
 functions/node_modules
 firebase-debug.log
+
+# Firebase service account keys (must never be committed)
+*-firebase-adminsdk-*.json
+serviceAccount*.json
+scripts/*-firebase-adminsdk-*.json
+scripts/serviceAccount*.json

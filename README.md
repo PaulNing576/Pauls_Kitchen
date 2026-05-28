@@ -82,6 +82,10 @@ Responsive Experience:
     - Analytics dashboard  
     - Customer accounts  
     - Frontend & Backend notification system  
-    - Domain-based email  
+    - Domain-based email 
+
+**Recipe:**  
+    All the dish images are originally made by Paul. The dishes are all authentic Chinese cuisine.  
+    Message me directly to get detailed recipe.  
 
 ## Author: Boyuan (Paul) Ning, UC Berkeley, 2026

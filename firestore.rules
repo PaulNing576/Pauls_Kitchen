@@ -1,0 +1,70 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.admin == true;
+    }
+
+    function onlyChanges(allowedFields) {
+      return request.resource.data.diff(resource.data)
+        .affectedKeys()
+        .hasOnly(allowedFields);
+    }
+
+    // ---------------- waitlist ----------------
+    // Public can create a waitlist entry (the landing page form).
+    // Only admins may read, update, or delete.
+    match /waitlist/{id} {
+
+      allow create: if
+        request.resource.data.keys().hasOnly(
+          ['firstName', 'email', 'status', 'createdAt']
+        )
+        && request.resource.data.firstName is string
+        && request.resource.data.email is string
+        && request.resource.data.status == 'pending';
+
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ---------------- codes ----------------
+    // Anyone can read (needed for customers to validate a code at checkout).
+    // Only admins create or delete.
+    // Customers may update ONLY to flip `used` to true at checkout.
+    match /codes/{id} {
+
+      allow read: if true;
+      allow create, delete: if isAdmin();
+
+      allow update: if isAdmin()
+        || (onlyChanges(['used'])
+            && request.resource.data.used == true);
+    }
+
+    // ---------------- orders ----------------
+    // Customers create orders at checkout.
+    // Only admins read or update.
+    match /orders/{id} {
+
+      allow create: if
+        request.resource.data.keys().hasOnly(
+          ['items', 'reservationTime', 'createdAt']
+        )
+        && request.resource.data.items is list
+        && request.resource.data.items.size() > 0;
+
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ---------------- mail_logs ----------------
+    // Written by Cloud Functions (admin SDK bypasses rules).
+    // No client-side writes are ever allowed.
+    match /mail_logs/{id} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+  }
+}

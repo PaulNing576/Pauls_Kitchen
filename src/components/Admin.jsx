@@ -16,15 +16,18 @@ import {
 
 import generateCode from "../utils/generateCode"
 import AdminLogin from "./AdminLogin"
+import { useAuth } from "../contexts/AuthContext"
 
 function Admin() {
 
-  const [authenticated, setAuthenticated] = useState(false)
+  const { user, isAdmin, loading, signOut } = useAuth()
   const [orders, setOrders] = useState([])
   const [waitlist, setWaitlist] = useState([])
   const db = getFirestore(app)
 
   useEffect(() => {
+
+    if (!isAdmin) return
 
     const waitlistQuery = query(
       collection(db, "waitlist"),
@@ -72,7 +75,7 @@ function Admin() {
       unsubscribeWaitlist()
     }
 
-  }, [])
+  }, [isAdmin, db])
 
   async function completeOrder(orderId) {
 
@@ -160,14 +163,16 @@ function Admin() {
     }
   }
 
-  if (!authenticated) {
+  if (loading) {
     return (
-      <AdminLogin
-        onSuccess={() =>
-          setAuthenticated(true)
-        }
-      />
+      <div className="admin-login-page">
+        <p>Loading…</p>
+      </div>
     )
+  }
+
+  if (!user || !isAdmin) {
+    return <AdminLogin />
   }
 
   async function declineRequest(user) {
@@ -186,6 +191,17 @@ function Admin() {
   return (
 
     <div className="admin-page">
+      <div className="admin-topbar">
+        <span className="admin-user-email">
+          {user.email}
+        </span>
+        <button
+          className="admin-signout-button"
+          onClick={signOut}
+        >
+          Sign out
+        </button>
+      </div>
       <button
         className="generate-code-button"
         onClick={generateSingleCode}
@@ -212,8 +228,8 @@ function Admin() {
                 ).toLocaleString()}
             </span>
           </h3>
-          {order.items.map((item) => (
-            <p>
+          {order.items.map((item, index) => (
+            <p key={index}>
               {item.name} x{item.quantity}
             </p>
           ))}
@@ -230,9 +246,6 @@ function Admin() {
       {
         waitlist.map((user) => (
 
-          <div
-            key={user.id}
-          >
           <div
             key={user.id}
             className="waitlist-card"
@@ -286,7 +299,6 @@ function Admin() {
                 </p>
               )
             }
-          </div>
           </div>
         ))
       }

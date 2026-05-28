@@ -10,6 +10,7 @@ import {
 import App from './App'
 import Admin from './components/Admin'
 import Landing from './components/Landing'
+import { AuthProvider } from './contexts/AuthContext'
 
 import "./styles/global.css"
 import "./styles/landing.css"
@@ -22,24 +23,28 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
   <BrowserRouter>
 
-    <Routes>
+    <AuthProvider>
 
-      <Route
-        path="/"
-        element={<Landing />}
-      />
+      <Routes>
 
-      <Route
-        path="/menu"
-        element={<App />}
-      />
+        <Route
+          path="/"
+          element={<Landing />}
+        />
 
-      <Route
-        path="/admin"
-        element={<Admin />}
-      />
+        <Route
+          path="/menu"
+          element={<App />}
+        />
 
-    </Routes>
+        <Route
+          path="/admin"
+          element={<Admin />}
+        />
+
+      </Routes>
+
+    </AuthProvider>
 
   </BrowserRouter>
 )
