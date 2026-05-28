@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 
-import app from "../firebase"
+import { db, functions } from "../firebase"
 
 import {
-  getFirestore,
   collection,
   onSnapshot,
   query,
@@ -14,6 +13,8 @@ import {
   updateDoc
 } from "firebase/firestore"
 
+import { httpsCallable } from "firebase/functions"
+
 import generateCode from "../utils/generateCode"
 import AdminLogin from "./AdminLogin"
 import { useAuth } from "../contexts/AuthContext"
@@ -23,8 +24,6 @@ function Admin() {
   const { user, isAdmin, loading, signOut } = useAuth()
   const [orders, setOrders] = useState([])
   const [waitlist, setWaitlist] = useState([])
-  const db = getFirestore(app)
-
   useEffect(() => {
 
     if (!isAdmin) return
@@ -134,29 +133,14 @@ function Admin() {
         }
       )
 
-      const response =
-        await fetch(
-          "https://us-central1-pauls-kitchen-bf4e6.cloudfunctions.net/sendApprovalEmailHttp",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-            body: JSON.stringify({
-              email: user.email,
-              code: code
-            })
-          }
-        )
+      const sendEmail = httpsCallable(functions, "sendEmail");
+      await sendEmail({
+        template: "accessCode",
+        to: user.email,
+        data: { code },
+      });
 
-      alert(
-        `${user.firstName}'s code: ${code}`
-      )
-
-      const result =
-        await response.json()
-      console.log(result)
+      alert(`${user.firstName}'s code: ${code}`);
 
     } catch (error) {
       console.error(error)
@@ -182,7 +166,13 @@ function Admin() {
         {
           status: "declined"
         }
-      )
+      );
+      const sendEmail = httpsCallable(functions, "sendEmail");
+      await sendEmail({
+        template: "waitlistRejected",
+        to: user.email,
+        data: { firstName: user.firstName },
+      });
     } catch (error) {
       console.error(error)
     }
@@ -206,7 +196,7 @@ function Admin() {
         className="generate-code-button"
         onClick={generateSingleCode}
       >
-        Generate Invite Code
+        Generate Onetime Code
       </button>
       <button
         className="generate-guest-button"

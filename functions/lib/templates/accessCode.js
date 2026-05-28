@@ -22,7 +22,7 @@ function html(data) {
       ${data.code}
     </div>
     <p style="font-size: 13px; color: #555;">
-      This code is single-use. If you didn't request it, you can ignore this email.
+      Keep this code safe — you will need it to complete your reservation. If you didn't request this, you can ignore this email.
     </p>
   `;
   return layout({title: subject(), bodyHtml: body});

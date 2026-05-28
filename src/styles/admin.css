@@ -187,5 +187,19 @@
 /* ========================= Mobile Responsive ========================= */
 
 @media (max-width: 768px) {
+  .generate-code-button,
+  .generate-guest-button {
+    width: calc(50% - 10px);
+    margin: 0;
+    padding: 12px 10px;
+    font-size: 0.95rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
 
+  .generate-code-button {
+    margin-right: 8px;
+  }
 }

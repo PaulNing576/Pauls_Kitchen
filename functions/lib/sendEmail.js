@@ -4,7 +4,7 @@ const {getResendClient} = require("./resendClient");
 const {getTemplate} = require("./templates");
 const {isValidEmail} = require("./validators");
 
-const FROM_ADDRESS = "Paul's Kitchen <onboarding@resend.dev>";
+const FROM_ADDRESS = process.env.FROM_EMAIL || "Paul's Kitchen <onboarding@resend.dev>";
 
 function getDb() {
   if (admin.apps.length === 0) {
