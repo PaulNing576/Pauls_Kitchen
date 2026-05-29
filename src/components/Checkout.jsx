@@ -1,10 +1,85 @@
 import { useState } from "react"
+import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
+import { httpsCallable } from "firebase/functions"
+
+import { stripePromise } from "../lib/stripe"
+import { functions } from "../firebase"
 
 /* ui imports */
 import Button from "../components/ui/Button"
 import Input from "../components/ui/Input"
 import Card from "../components/ui/Card"
 import Modal from "../components/ui/Modal"
+
+function PaymentForm({ total, verifiedCodeData, reservationTime, placeOrder, prevStep, customerName, customerEmail, confirmEmail }) {
+  const stripe = useStripe()
+  const elements = useElements()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+
+  async function handlePay() {
+    if (!customerName.trim()) {
+      setError("Please enter your name")
+      return
+    }
+    if (!customerEmail.trim()) {
+      setError("Please enter your email")
+      return
+    }
+    if (customerEmail.trim() !== confirmEmail.trim()) {
+      setError("Emails do not match")
+      return
+    }
+
+    setLoading(true)
+    setError("")
+
+    try {
+      const createPI = httpsCallable(functions, "createPaymentIntent")
+      const result = await createPI({ amount: total })
+      const { clientSecret, paymentIntentId } = result.data
+
+      const confirmResult = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: { card: elements.getElement(CardElement) },
+      })
+
+      if (confirmResult.error) {
+        setError(confirmResult.error.message)
+        return
+      }
+
+      if (confirmResult.paymentIntent.status === "succeeded") {
+        await placeOrder(verifiedCodeData, reservationTime, paymentIntentId, {
+          name: customerName.trim(),
+          email: customerEmail.trim(),
+        })
+      }
+    } catch (e) {
+      setError(e.message || "Payment failed. Please try again.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <>
+      <h2>Payment</h2>
+      <h3>Total: ${total}</h3>
+      <div className="stripe-card-wrapper">
+        <CardElement options={{ style: { base: { fontSize: "16px" } } }} />
+      </div>
+      {error && <p className="payment-error">{error}</p>}
+      <div className="checkout-buttons">
+        <Button type="secondary" onClick={prevStep}>
+          Back
+        </Button>
+        <Button type="primary" onClick={handlePay} disabled={!stripe || loading}>
+          {loading ? "Processing…" : `Pay $${total}`}
+        </Button>
+      </div>
+    </>
+  )
+}
 
 function Checkout({
   cart,
@@ -25,6 +100,18 @@ function Checkout({
     useState(false)
   const [verifiedCodeData, setVerifiedCodeData] =
     useState(null)
+
+  const [customerName, setCustomerName] = useState("")
+  const [customerEmail, setCustomerEmail] = useState("")
+  const [confirmEmail, setConfirmEmail] = useState("")
+
+  function validateCustomerInfo() {
+    if (!customerName.trim()) return "Please enter your name"
+    if (!customerEmail.trim()) return "Please enter your email"
+    if (!confirmEmail.trim()) return "Please confirm your email"
+    if (customerEmail.trim() !== confirmEmail.trim()) return "Emails do not match"
+    return null
+  }
 
   const total = cart.reduce(
     (sum, item) =>
@@ -332,55 +419,75 @@ function Checkout({
 
           step === 4 && (
             <div>
+              <h2>Your Information</h2>
+              <div className="customer-info-fields">
+                <Input
+                  placeholder="Full Name"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                />
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={customerEmail}
+                  onChange={(e) => setCustomerEmail(e.target.value)}
+                />
+                <Input
+                  type="email"
+                  placeholder="Confirm Email"
+                  value={confirmEmail}
+                  onChange={(e) => setConfirmEmail(e.target.value)}
+                />
+              </div>
               {
-                verifiedCodeData?.type ===
-                  "permanent"
+                verifiedCodeData?.type === "permanent"
                 ||
-                verifiedCodeData?.type ===
-                  "guest"
+                verifiedCodeData?.type === "guest"
                 ? (
                   <>
-                    <h2>
-                      Payment Skipped
-                    </h2>
+                    <h2>Payment Skipped</h2>
                     <p>
                       Your access code includes
                       complimentary dining. <br />
                       Balance for this meal is waived!
                     </p>
+                    <div className="checkout-buttons">
+                      <Button type="secondary" onClick={prevStep}>Back</Button>
+                      <Button
+                        type="primary"
+                        onClick={() => {
+                          const err = validateCustomerInfo()
+                          if (err) {
+                            setModalData({ open: true, title: "Missing Information", message: err })
+                            return
+                          }
+                          placeOrder(
+                            verifiedCodeData,
+                            { date: selectedDate, time: selectedTime },
+                            null,
+                            { name: customerName.trim(), email: customerEmail.trim() },
+                          )
+                        }}
+                      >
+                        Place Order
+                      </Button>
+                    </div>
                   </>
                 ) : (
-                  <>
-                    <h2>
-                      Payment
-                    </h2>
-                    <p>
-                      Online payment coming soon
-                    </p>
-                  </>
+                  <Elements stripe={stripePromise}>
+                    <PaymentForm
+                      total={total}
+                      verifiedCodeData={verifiedCodeData}
+                      reservationTime={{ date: selectedDate, time: selectedTime }}
+                      placeOrder={placeOrder}
+                      prevStep={prevStep}
+                      customerName={customerName}
+                      customerEmail={customerEmail}
+                      confirmEmail={confirmEmail}
+                    />
+                  </Elements>
                 )
               }
-              <div className="checkout-buttons">
-                <Button 
-                  type="secondary" 
-                  onClick={prevStep}>
-                  Back
-                </Button>
-                <Button 
-                  type="primary" 
-                  onClick={() =>
-                    placeOrder(
-                      verifiedCodeData,
-                      {
-                        date: selectedDate,
-                        time: selectedTime
-                      }
-                    )
-                  }
-                >
-                  Place Order
-                </Button>
-              </div>
             </div>
           )
         }

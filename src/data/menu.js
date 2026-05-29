@@ -41,6 +41,14 @@ const menu = [
     image: "Sanwenyucishen.jpg"
   },
 
+  {
+    id: 66,
+    name: "Real Payment Test",
+    price: 0.5,
+    category: "Appetizer",
+    image: "Nothing"
+  },
+
   // ========================= Vegetarian =========================
 
   {

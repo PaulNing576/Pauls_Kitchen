@@ -7,19 +7,19 @@ import menu from "./data/menu"
 import Checkout from "./components/Checkout"
 
 /* ui imports */
+import Modal from "./components/ui/Modal"
 
-import app from "./firebase"
+import app, { functions } from "./firebase"
 
 import {
   getFirestore,
   collection,
-  addDoc,
   query,
   where,
-  getDocs,
-  doc,
-  updateDoc
+  getDocs
 } from "firebase/firestore"
+
+import { httpsCallable } from "firebase/functions"
 
 function App() {
 
@@ -31,6 +31,7 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false)
   const [currentPage, setCurrentPage] =
     useState("menu")
+  const [orderSuccess, setOrderSuccess] = useState(false)
 
   const navigate = useNavigate()
 
@@ -115,37 +116,24 @@ function App() {
 
   async function placeOrder(
     codeData,
-    reservationTime
+    reservationTime,
+    paymentIntentId = null,
+    customerInfo = null,
   ) {
     try {
-      await addDoc(
-        collection(db, "orders"),
-        {
-          items: cart,
-          reservationTime,
-          createdAt: new Date()
-        }
-      )
+      const confirmOrder = httpsCallable(functions, "confirmOrder")
+      await confirmOrder({
+        items: cart,
+        reservationTime,
+        codeData,
+        paymentIntentId,
+        customerName: customerInfo?.name || null,
+        customerEmail: customerInfo?.email || null,
+      })
 
-      if (
-        codeData.type === "single"
-        ||
-        codeData.type === "guest"
-      ) {
-        await updateDoc(
-          doc(db, "codes", codeData.id),
-          {
-            used: true
-          }
-        )
-      }
-
-      alert("Order placed! You will received a confirm email shortly.")
-      setCart([])
-      navigate("/")
-
+      setOrderSuccess(true)
     } catch (error) {
-      console.log(error)
+      console.error(error)
       alert("Failed to place order")
     }
   }
@@ -190,13 +178,26 @@ function App() {
       {
 
         currentPage === "checkout" && (
+          <>
+            <Checkout
+              cart={cart}
+              placeOrder={placeOrder}
+              setCurrentPage={setCurrentPage}
+              verifyCode={verifyCode}
+            />
 
-          <Checkout
-            cart={cart}
-            placeOrder={placeOrder}
-            setCurrentPage={setCurrentPage}
-            verifyCode={verifyCode}
-          />
+            <Modal
+              isOpen={orderSuccess}
+              title="Order Placed!"
+              onClose={() => {
+                setOrderSuccess(false)
+                setCart([])
+                navigate("/")
+              }}
+            >
+              Thank you for your order. A confirmation email will be sent to you shortly.
+            </Modal>
+          </>
         )
       }
     </div>

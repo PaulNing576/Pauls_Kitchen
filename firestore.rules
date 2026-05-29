@@ -41,16 +41,11 @@ service cloud.firestore {
     }
 
     // ---------------- orders ----------------
-    // Customers create orders at checkout.
+    // Orders are created through the confirmOrder Cloud Function (Admin SDK).
     // Only admins read or update.
     match /orders/{id} {
 
-      allow create: if
-        request.resource.data.keys().hasOnly(
-          ['items', 'reservationTime', 'createdAt']
-        )
-        && request.resource.data.items is list
-        && request.resource.data.items.size() > 0;
+      allow create: if isAdmin();
 
       allow read, update, delete: if isAdmin();
     }

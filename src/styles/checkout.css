@@ -174,6 +174,31 @@
   transform: scale(1.05);
 }
 
+/* ========================= Customer Info ========================= */
+
+.customer-info-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* ========================= Stripe Payment ========================= */
+
+.stripe-card-wrapper {
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+  margin-bottom: 16px;
+  background: #fff;
+}
+
+.payment-error {
+  color: #d63031;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
 /* ========================= Mobile Responsive ========================= */
 
 @media (max-width: 768px) {

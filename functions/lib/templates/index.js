@@ -1,11 +1,13 @@
 const accessCode = require("./accessCode");
 const waitlistApproved = require("./waitlistApproved");
 const waitlistRejected = require("./waitlistRejected");
+const orderConfirmation = require("./orderConfirmation");
 
 const templates = {
   accessCode,
   waitlistApproved,
   waitlistRejected,
+  orderConfirmation,
 };
 
 function getTemplate(name) {
