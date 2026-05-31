@@ -190,6 +190,14 @@ function Admin() {
     return <AdminLogin />
   }
 
+  async function ignoreRequest(user) {
+    try {
+      await deleteDoc(doc(db, "waitlist", user.id))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   async function declineRequest(user) {
     try {
       await updateDoc(
@@ -308,6 +316,14 @@ function Admin() {
                     }
                   >
                     Decline
+                  </button>
+                  <button
+                    className="ignore-button"
+                    onClick={() =>
+                      ignoreRequest(user)
+                    }
+                  >
+                    Ignore
                   </button>
                 </div>
               )

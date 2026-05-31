@@ -83,6 +83,19 @@
   font-weight: 600;
 }
 
+.ignore-button {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.ignore-button:hover {
+  background-color: #b8b8b8;
+}
+
 .generate-guest-button {
   background-color: #ffe0a8;
   border: none;
